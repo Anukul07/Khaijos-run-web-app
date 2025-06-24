@@ -7,7 +7,7 @@ export default function Landing() {
         <nav className="navigation">
           <button className="logo-button">
             <img
-              src="src\assets\Landing\Logo.png"
+              src="/src/assets/Landing/Logo.png"
               alt="Khaijos Logo"
               className="logo-image"
             />
@@ -18,9 +18,11 @@ export default function Landing() {
         <div className="top-header">
           <h1>MOVEMENT THAT INSPIRES YOU TO KEEP MOVING</h1>
           <p>JOIN OUR TEAM TODAY OR LOG IN</p>
-          <button>LOGIN/REGISTER</button>
+          <button>
+            <span>LOGIN / REGISTER</span>
+          </button>
         </div>
-        <div className="image-carousel"></div>
+        <div className="image-carousel">IMAGE CAROUSEL SECTION</div>
       </main>
       <footer>Footer</footer>
     </>

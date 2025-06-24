@@ -6,3 +6,8 @@
 html {
   font-size: 10px;
 }
+body {
+  font-family: "Inter", sans-serif;
+  line-height: 1px;
+  letter-spacing: 1px;
+}
