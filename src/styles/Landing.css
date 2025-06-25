@@ -1,10 +1,19 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 /* Header Section */
 header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  flex: 0 0 10vh;
   background-color: #000;
   padding: 1rem 0;
   border-bottom: 1px solid white;
-  height: 10vh;
-  width: 100%;
+  min-height: 60px;
 }
 
 .navigation {
@@ -13,13 +22,12 @@ header {
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
-  width: 100%;
+  padding-inline: 1rem;
 }
 
 .logo-button {
   border: none;
-  background-color: #000;
+  background-color: transparent;
   cursor: pointer;
   padding: 0;
   display: flex;
@@ -28,37 +36,28 @@ header {
 }
 
 .logo-image {
-  height: auto;
-  width: 20rem;
+  width: clamp(10rem, 20vw, 20rem); /* responsive width from 10rem to 20rem */
+  height: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
+@media screen and (max-width: 725px) {
+  .navigation {
+    padding-inline: 1rem;
+    justify-content: center;
+  }
 
-/* Add responsive breakpoints for different device sizes */
-@media screen and (max-width: 768px) {
   .logo-image {
-    width: 14rem;
-  }
-
-  header {
-    height: 8vh;
+    width: clamp(12rem, 30vw, 20rem);
+    height: auto;
+    max-height: 100%;
   }
 }
-
-@media screen and (max-width: 480px) {
-  .logo-image {
-    width: 10rem;
-  }
-
-  header {
-    padding: 0.5rem 0;
-  }
-}
-
 /* ****************************Main Section************************ */
 
 main {
-  height: 80vh;
+  flex: 1;
   background-color: #000;
-  width: 100%;
   display: grid;
   grid-template-rows: 1fr 2fr;
 }
@@ -84,7 +83,7 @@ main {
   font-size: 1.8rem;
   line-height: 1.6px;
   font-weight: 300;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
 }
 .top-header button {
   position: relative;
@@ -131,11 +130,436 @@ main {
   transform: translateY(-2px);
 }
 
+/* Image carousel section */
 .image-carousel {
-}
-footer {
-  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
   background-color: #000;
-  border-top: 1px solid white;
+  color: #fff;
+  gap: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Text section */
+.image-carousel .copy {
+  flex: 1;
+  max-width: 40%;
+  padding-right: 10rem;
+}
+.image-carousel .copy h1 {
+  font-size: 3.4rem;
+  letter-spacing: 1px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+.image-carousel .copy p {
+  font-size: 2rem;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+/* Spotlight image */
+.image-carousel .spotlight-wrapper {
+  flex: 1;
+  max-width: 18vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.image-carousel .spotlight-wrapper .spotlight {
   width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 1rem;
+  object-fit: contain;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.previews-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  gap: 6rem;
+}
+
+/* Preview images */
+.image-carousel .previews {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.5rem;
+}
+.image-carousel .previews .preview {
+  width: clamp(120px, 12vw, 180px);
+  height: clamp(120px, 12vw, 180px);
+  overflow: hidden;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.image-carousel .previews .preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.image-carousel .previews .preview.half-cut {
+  width: clamp(70px, 7vw, 100px);
+  height: clamp(70px, 7vw, 100px);
+}
+
+/* Dots navigation */
+.image-carousel .dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 4rem;
+}
+.image-carousel .dots .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+.image-carousel .dots .dot.active {
+  opacity: 1;
+}
+/* Responsive: Top Header */
+@media screen and (max-width: 850px) {
+  .top-header h1 {
+    font-size: 2.2rem;
+    margin: 2rem 1rem 4rem;
+  }
+
+  .top-header p {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .top-header button {
+    padding: 1.2rem 3rem;
+    font-size: 1.4rem;
+  }
+}
+@media screen and (max-width: 700px) {
+  .top-header h1 {
+    font-size: 2.2rem;
+    margin: 2rem 1rem 4rem;
+    line-height: 40px;
+    text-align: center;
+  }
+
+  .top-header p {
+    font-size: 1.4rem;
+    text-align: center;
+    line-height: 12px;
+  }
+}
+
+/* Responsive: Image Carousel Layout */
+@media screen and (max-width: 1024px) {
+  .image-carousel {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .image-carousel .copy {
+    max-width: 90%;
+    padding: 0;
+    text-align: center;
+  }
+
+  .image-carousel .copy h1 {
+    font-size: 2.2rem;
+  }
+
+  .image-carousel .copy p {
+    font-size: 1.6rem;
+  }
+
+  .image-carousel .spotlight-wrapper {
+    max-width: 80%;
+  }
+
+  .image-carousel .spotlight-wrapper .spotlight {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .previews-wrapper {
+    align-self: center;
+    gap: 1.2rem;
+    margin-top: 0;
+  }
+
+  .image-carousel .previews {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image-carousel .previews .preview {
+    width: 150px;
+    height: 150px;
+  }
+
+  .image-carousel .previews .preview.half-cut {
+    width: 80px;
+    height: 80px;
+  }
+
+  .image-carousel .dots {
+    margin-bottom: 2rem;
+  }
+}
+
+/* Extra Small Devices (phones) */
+@media screen and (max-width: 480px) {
+  .image-carousel .copy h1 {
+    font-size: 1.8rem;
+  }
+
+  .image-carousel .copy p {
+    font-size: 1.4rem;
+  }
+
+  .image-carousel .spotlight-wrapper {
+    max-width: 100%;
+  }
+
+  .image-carousel .spotlight-wrapper .spotlight {
+    max-width: 90vw;
+  }
+
+  .image-carousel .previews .preview {
+    width: 120px;
+    height: 120px;
+  }
+
+  .image-carousel .previews .preview.half-cut {
+    width: 60px;
+    height: 60px;
+  }
+
+  .top-header button {
+    width: 80%;
+    padding: 1rem;
+    font-size: 1.3rem;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   1 ▸ MAIN GRID: switch from “1fr 2fr” to natural height
+   ──────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  main {
+    /* let rows size to content instead of fixed fractions */
+    grid-template-rows: auto auto;
+    row-gap: 4rem; /* small breathing space between rows */
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   2 ▸ TOP-HEADER: shrink vertical rhythm as we go smaller
+   ──────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .top-header {
+    padding: 1.5rem 0;
+  }
+  .top-header h1 {
+    margin: 2rem 1rem 3rem;
+    font-size: clamp(2rem, 4.5vw, 2.4rem);
+  }
+  .top-header p {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .top-header {
+    padding: 1rem 0;
+  }
+  .top-header h1 {
+    margin: 1rem 1rem 2rem;
+  }
+  .top-header p {
+    margin-bottom: 1rem;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   3 ▸ CAROUSEL INTERNAL SPACING ON SMALL SCREENS
+   ──────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .image-carousel {
+    gap: 1.2rem; /* tighter column gap */
+  }
+  .previews-wrapper {
+    gap: 3rem; /* was 6rem */
+  }
+}
+
+@media (max-width: 480px) {
+  .image-carousel {
+    padding: 1.5rem 0.5rem;
+    gap: 1rem;
+  }
+  .image-carousel .dots {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────
+   FOOTER  •  responsive polish + icon styling
+   paste BELOW everything else in Landing.css
+   ────────────────────────────────────────────────────────── */
+
+/* base look (desktop ≥ 768px) already matches your 10vh row */
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; /* allows graceful wrapping when needed */
+  column-gap: 2.5rem;
+  row-gap: 1rem;
+  color: white;
+  background-color: #000;
+  padding: 2rem 4rem;
+  font-size: 2rem;
+  font-weight: 200;
+  border-top: 1px solid white;
+}
+
+footer .left-section,
+footer .mid-section,
+footer .right-section {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+/* mid links keep a little room to grow */
+footer .mid-section {
+  flex: 1 1 auto;
+  justify-content: center;
+}
+
+footer .mid-section a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.6rem;
+  transition: opacity 0.25s;
+}
+footer .mid-section a:hover {
+  opacity: 0.8;
+}
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+/* ── Social icon buttons ─────────────────────────────── */
+.icon-button {
+  --size: 40px; /* change once, scales everywhere   */
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff; /* white icons */
+  text-decoration: none;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.icon-button:hover {
+  transform: scale(1.12);
+  background: rgba(255, 255, 255, 0.25);
+}
+.icon-button:active {
+  transform: scale(0.97);
+  background: rgba(255, 255, 255, 0.35);
+}
+.icon-button svg {
+  width: 55%;
+  height: 55%;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   RESPONSIVE FOOTER EXTENSION
+   Keeps desktop design intact, adapts below 768px
+   ────────────────────────────────────────────────────────────── */
+
+/* Tablet screens and down (≤768px) */
+@media (max-width: 768px) {
+  footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    gap: 1.5rem;
+  }
+
+  footer .left-section,
+  footer .mid-section,
+  footer .right-section {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+  }
+
+  footer .mid-section {
+    order: 2;
+    flex: unset;
+  }
+
+  footer .left-section {
+    order: 1;
+  }
+
+  footer .right-section {
+    order: 3;
+    flex-direction: column;
+  }
+
+  .social-icons {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+  }
+
+  .icon-button {
+    --size: 36px;
+  }
+
+  footer .mid-section a {
+    font-size: 1.5rem;
+    margin-inline: 0.5rem;
+  }
+}
+
+/* Smallest screens (≤480px) */
+@media (max-width: 480px) {
+  footer {
+    padding: 1.5rem 1rem;
+    font-size: 1.6rem;
+    gap: 1rem;
+  }
+
+  footer .mid-section {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .icon-button {
+    --size: 34px;
+  }
 }
