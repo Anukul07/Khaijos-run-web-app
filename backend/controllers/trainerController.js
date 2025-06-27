@@ -4,7 +4,7 @@ exports.getTrainerProfile = async (req, res) => {
   try {
     const trainer = await Trainer.findOne({ userId: req.user.id }).populate(
       "userId",
-      "name email"
+      "name email photo"
     );
     if (!trainer) return res.status(404).json({ message: "Trainer not found" });
     res.json(trainer);
@@ -15,20 +15,24 @@ exports.getTrainerProfile = async (req, res) => {
 
 exports.createOrUpdateTrainer = async (req, res) => {
   try {
+    const userId = req.user.id;
+
+    // Optionally update user photo
+    if (req.body.photo) {
+      await User.findByIdAndUpdate(userId, { photo: req.body.photo });
+    }
+
     const data = {
-      userId: req.user.id,
-      photo: req.body.photo,
+      userId,
       totalSessions: req.body.totalSessions || 0,
       totalRunners: req.body.totalRunners || 0,
       totalAccolades: req.body.totalAccolades || 0,
       personalBest: req.body.personalBest || "",
     };
 
-    const existing = await Trainer.findOne({ userId: req.user.id });
+    const existing = await Trainer.findOne({ userId });
     const trainer = existing
-      ? await Trainer.findOneAndUpdate({ userId: req.user.id }, data, {
-          new: true,
-        })
+      ? await Trainer.findOneAndUpdate({ userId }, data, { new: true })
       : await Trainer.create(data);
 
     res.status(200).json(trainer);

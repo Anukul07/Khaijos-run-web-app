@@ -51,6 +51,91 @@
   background: radial-gradient(circle at center, #333, #111);
   flex-direction: column;
 }
+/* === Mesh Gradient Background === */
+.auth-right {
+  background: radial-gradient(circle at center, #333, #111);
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: -4px 0 30px rgba(255, 255, 255, 0.2);
+}
+
+.auth-mesh-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none; /* ensures no interaction */
+  overflow: hidden;
+}
+
+/* === Base mesh style === */
+.mesh {
+  position: absolute;
+  width: 600px;
+  height: 400px;
+  border-radius: 50% / 35%; /* irregular oval */
+  filter: blur(200px);
+  opacity: 0.6;
+  animation: meshMove 6s ease-in-out infinite alternate;
+}
+
+/* === Individual meshes === */
+.mesh1 {
+  background: #0f2938;
+  top: 10%;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.mesh2 {
+  background: #0f2938;
+  top: 30%;
+  right: 5%;
+  animation-delay: 1s;
+}
+
+.mesh3 {
+  background: #414f5c;
+  bottom: 15%;
+  left: 15%;
+  animation-delay: 2s;
+}
+
+.mesh4 {
+  background: #0f2938;
+  bottom: 10%;
+  right: 15%;
+  animation-delay: 3s;
+}
+
+.mesh5 {
+  background: #bd3246;
+  top: 40%;
+  left: 40%;
+  animation-delay: 4s;
+  opacity: 0.7;
+}
+
+/* === Animation keyframes === */
+@keyframes meshMove {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(-40px, 40px) scale(1.05);
+  }
+  100% {
+    transform: translate(30px, -30px) scale(1);
+  }
+}
+
+/* Ensure carousel content stays above mesh */
+.carousel-image,
+.dots {
+  position: relative;
+  z-index: 1;
+}
 
 .carousel-image {
   width: 100%;
@@ -150,5 +235,24 @@
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+.auth-fade-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  animation: fadeInSlide 0.4s ease both;
+}
+
+@keyframes fadeInSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

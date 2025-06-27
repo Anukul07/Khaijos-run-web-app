@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./../../styles/authentication.css";
 import Footer from "../common/Footer";
 import Login from "../Login";
+import Registration from "../Registration";
 
 const slides = [
   {
@@ -19,6 +20,7 @@ const slides = [
 const Authentication = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const navigate = useNavigate();
+  const [showLogin, setShowLogin] = useState(true);
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -46,11 +48,27 @@ const Authentication = () => {
       <div className="auth-container">
         {/* Left side - Auth Box */}
         <div className="auth-left">
-          <Login />
+          <div
+            className="auth-fade-container"
+            key={showLogin ? "login" : "register"} // 🔁 key forces re-render
+          >
+            {showLogin ? (
+              <Login onSwitch={() => setShowLogin(false)} />
+            ) : (
+              <Registration onSwitch={() => setShowLogin(true)} />
+            )}
+          </div>
         </div>
 
         {/* Right side - Carousel */}
         <div className="auth-right">
+          <div className="auth-mesh-bg">
+            <div className="mesh mesh1" />
+            <div className="mesh mesh2" />
+            <div className="mesh mesh3" />
+            <div className="mesh mesh4" />
+            <div className="mesh mesh5" />
+          </div>
           <img
             key={currentSlide}
             src={slides[currentSlide].image}
