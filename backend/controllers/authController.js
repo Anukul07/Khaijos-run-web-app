@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const generateOTP = require("../utils/otpGenerator");
+const generateOTP = require("../utils/optGenerator");
 
 const generateToken = (user) => {
   return jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
@@ -11,7 +11,7 @@ const generateToken = (user) => {
 
 // Register
 exports.register = async (req, res) => {
-  const { name, email, password, role } = req.body;
+  const { name, email, password, role, phone } = req.body;
   try {
     const existing = await User.findOne({ email });
     if (existing)
@@ -23,8 +23,9 @@ exports.register = async (req, res) => {
       email,
       password: hashedPassword,
       role,
+      phone,
     });
-    res.status(201).json({ token: generateToken(user), user });
+    res.status(201).json({ message: "Account created successfully", user });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

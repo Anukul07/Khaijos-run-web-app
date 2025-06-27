@@ -1,4 +1,4 @@
-.login-box {
+.registration-box {
   width: 100%;
   max-width: 400px;
   padding: 2rem;
@@ -9,57 +9,88 @@
   font-family: "Inter", sans-serif;
 }
 
-.login-box h2 {
+.registration-box h2 {
   font-size: 3rem;
-  margin-bottom: 2.4rem;
+  margin-bottom: 2rem;
 }
 
-.login-box p {
-  font-size: 1.8rem;
-  color: #ccc;
-  margin-bottom: 1.2rem;
-}
-
-.login-auth-switch {
+.registration-box .auth-switch {
   font-size: 1.4rem;
   color: #ccc;
   margin-bottom: 1rem;
-  font-weight: 400;
 }
 
-.login-auth-switch a {
+.registration-box .auth-switch a {
   color: rgb(184, 26, 99);
   cursor: pointer;
 }
 
-.login-divider {
+.divider {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin: 3rem 0;
+  margin: 2rem 0;
 }
 
-.login-divider hr {
+.divider hr {
   flex-grow: 1;
   border: none;
   border-top: 1px solid #aaa;
 }
 
-.login-divider-icon {
+.divider-icon {
   font-size: 1rem;
   color: #aaa;
 }
 
-.login-form {
+.registration-form {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 }
 
-.login-form input {
+.registration-form input {
+  padding: 1.2rem 1rem;
+  border: 1px solid #555;
+  border-radius: 6px;
+  font-size: 1.6rem;
+  background-color: #1e1e1e;
+  color: white;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.registration-form input:focus {
+  border-color: #00bcd4;
+  box-shadow: 0 0 5px rgba(0, 188, 212, 0.5);
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+input.error {
+  border-color: #e74c3c;
+  box-shadow: 0 0 5px rgba(231, 76, 60, 0.5);
+}
+
+.error-text {
+  color: #e74c3c;
+  font-size: 1.2rem;
+  margin-top: 0.3rem;
+  text-align: left;
+}
+
+.password-wrapper {
+  position: relative;
   width: 100%;
-  padding: 2rem 1rem;
-  font-size: 1.4rem;
+}
+.password-wrapper input {
+  width: 100%;
+  padding: 1.2rem 3rem 1.2rem 1rem; /* Extra right padding for emoji */
+  font-size: 1.6rem;
   background-color: #1e1e1e;
   color: white;
   border: 1px solid #555;
@@ -68,37 +99,22 @@
   transition: border-color 0.3s;
 }
 
-.login-form input:focus {
+.password-wrapper input:focus {
   border-color: #00bcd4;
   box-shadow: 0 0 5px rgba(0, 188, 212, 0.5);
 }
 
-.login-password-wrapper {
-  position: relative;
-}
-
-.login-toggle-password {
+.toggle-password {
   position: absolute;
-  right: 1rem;
   top: 50%;
+  right: 1rem;
   transform: translateY(-50%);
   cursor: pointer;
   color: #ccc;
+  font-size: 1.4rem;
 }
 
-.login-form-links {
-  display: flex;
-  justify-content: space-between;
-  font-size: 1.2rem;
-  font-weight: 200;
-}
-
-.login-form-links a {
-  color: #fff;
-  text-decoration: underline;
-}
-
-.login-button {
+.registration-button {
   position: relative;
   color: white;
   padding: 1.6rem 4rem;
@@ -112,12 +128,11 @@
   border: 2px solid rgba(33, 90, 110, 0.4);
   overflow: hidden;
   transition: all 0.3s ease;
-  position: relative;
   z-index: 1;
   width: 100%;
 }
 
-.login-button::before {
+.registration-button::before {
   content: "";
   position: absolute;
   top: 0;
@@ -130,46 +145,36 @@
   transition: opacity 0.3s ease;
 }
 
-.login-button span {
+.registration-button span {
   position: relative;
   z-index: 2;
 }
 
-.login-button:hover::before {
+.registration-button:hover::before {
   opacity: 1;
 }
 
-.login-button:hover {
+.registration-button:hover {
   box-shadow: 0 0 15px rgba(33, 90, 110, 0.6);
   transform: translateY(-2px);
 }
 
 @media (max-width: 600px) {
-  .login-box {
+  .registration-box {
     padding: 1.5rem;
   }
 
-  .login-button {
+  .registration-button {
     font-size: 1.4rem;
     padding: 1.4rem 2rem;
   }
-
-  .login-form-links {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-}
-#login-error-message {
-  color: #ff4d4d;
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
-  text-align: center;
 }
 
-#login-success-message {
-  color: #4caf50;
+.feedback-message {
+  color: #00e676;
+  background-color: #1c1c1c;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
   font-size: 1.4rem;
-  margin-bottom: 1rem;
-  text-align: center;
 }

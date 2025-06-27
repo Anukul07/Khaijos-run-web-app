@@ -8,7 +8,7 @@ const trainerSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    photo: { type: String }, // image URL
+
     totalSessions: { type: Number, default: 0 },
     totalRunners: { type: Number, default: 0 },
     totalAccolades: { type: Number, default: 0 },
