@@ -1,0 +1,154 @@
+.auth-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #000;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.auth-header {
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: black;
+  border-bottom: 1px solid white;
+}
+
+.logo-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.logo-img {
+  height: 80px;
+}
+
+.auth-container {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  overflow-y: auto;
+}
+
+.auth-left,
+.auth-right {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.auth-left {
+  background-color: #1e1e1e;
+}
+
+.auth-right {
+  background: radial-gradient(circle at center, #333, #111);
+  flex-direction: column;
+}
+
+.carousel-image {
+  width: 100%;
+  max-width: 450px;
+  max-height: 50vh;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  height: auto;
+  object-fit: contain;
+}
+
+.dots {
+  display: flex;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #555;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  background-color: white;
+}
+
+@media (max-width: 768px) {
+  .carousel-image {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-image {
+    max-width: 260px;
+  }
+}
+@media (max-height: 700px) {
+  .carousel-image {
+    max-height: 40vh;
+  }
+}
+
+@media (max-height: 500px) {
+  .carousel-image {
+    max-height: 35vh;
+  }
+
+  .auth-box {
+    padding: 1rem;
+  }
+}
+@media (max-width: 1024px) {
+  .auth-container {
+    flex-direction: column;
+  }
+
+  .auth-left,
+  .auth-right {
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .carousel-image {
+    max-width: 400px;
+  }
+}
+@media (max-width: 600px) {
+  .auth-box {
+    padding: 1.5rem;
+  }
+
+  .dots {
+    justify-content: center;
+  }
+
+  .logo-img {
+    height: 50px;
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

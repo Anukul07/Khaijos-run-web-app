@@ -1,0 +1,141 @@
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; /* allows graceful wrapping when needed */
+  column-gap: 2.5rem;
+  row-gap: 1rem;
+  color: white;
+  background-color: #000;
+  padding: 2rem 4rem;
+  font-size: 2rem;
+  font-weight: 200;
+  border-top: 1px solid white;
+}
+
+footer .left-section,
+footer .mid-section,
+footer .right-section {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+/* mid links keep a little room to grow */
+footer .mid-section {
+  flex: 1 1 auto;
+  justify-content: center;
+}
+
+footer .mid-section a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.6rem;
+  transition: opacity 0.25s;
+}
+footer .mid-section a:hover {
+  opacity: 0.8;
+}
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+/* ── Social icon buttons ─────────────────────────────── */
+.icon-button {
+  --size: 40px; /* change once, scales everywhere   */
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff; /* white icons */
+  text-decoration: none;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.icon-button:hover {
+  transform: scale(1.12);
+  background: rgba(255, 255, 255, 0.25);
+}
+.icon-button:active {
+  transform: scale(0.97);
+  background: rgba(255, 255, 255, 0.35);
+}
+.icon-button svg {
+  width: 55%;
+  height: 55%;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   RESPONSIVE FOOTER EXTENSION
+   Keeps desktop design intact, adapts below 768px
+   ────────────────────────────────────────────────────────────── */
+
+/* Tablet screens and down (≤768px) */
+@media (max-width: 768px) {
+  footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    gap: 1.5rem;
+  }
+
+  footer .left-section,
+  footer .mid-section,
+  footer .right-section {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+  }
+
+  footer .mid-section {
+    order: 2;
+    flex: unset;
+  }
+
+  footer .left-section {
+    order: 1;
+  }
+
+  footer .right-section {
+    order: 3;
+    flex-direction: column;
+  }
+
+  .social-icons {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+  }
+
+  .icon-button {
+    --size: 36px;
+  }
+
+  footer .mid-section a {
+    font-size: 1.5rem;
+    margin-inline: 0.5rem;
+  }
+}
+
+/* Smallest screens (≤480px) */
+@media (max-width: 480px) {
+  footer {
+    padding: 1.5rem 1rem;
+    font-size: 1.6rem;
+    gap: 1rem;
+  }
+
+  footer .mid-section {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .icon-button {
+    --size: 34px;
+  }
+}
