@@ -21,6 +21,9 @@ app.use("/api/auth", authRoutes);
 const trainerRoutes = require("./routes/trainerRoutes");
 app.use("/api/trainers", trainerRoutes);
 
+const sessionRoutes = require("./routes/sessionRoutes");
+app.use("/api/sessions", sessionRoutes);
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected ✅"))

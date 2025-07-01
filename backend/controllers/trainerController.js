@@ -25,7 +25,6 @@ exports.createOrUpdateTrainer = async (req, res) => {
     const data = {
       userId,
       totalSessions: req.body.totalSessions || 0,
-      totalRunners: req.body.totalRunners || 0,
       totalAccolades: req.body.totalAccolades || 0,
       personalBest: req.body.personalBest || "",
     };

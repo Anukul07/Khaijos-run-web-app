@@ -10,7 +10,6 @@ const trainerSchema = new mongoose.Schema(
     },
 
     totalSessions: { type: Number, default: 0 },
-    totalRunners: { type: Number, default: 0 },
     totalAccolades: { type: Number, default: 0 },
     personalBest: { type: String }, // e.g., "5km in 22m"
   },
