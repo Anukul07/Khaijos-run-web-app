@@ -35,6 +35,10 @@ const sessionSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    routePath: {
+      type: [[Number]],
+      default: [],
+    },
   },
   { timestamps: true }
 );

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   FaCopyright,
   FaFacebookF,
@@ -44,6 +45,7 @@ const slides = [
 ];
 export default function Landing() {
   const [index, setIndex] = useState(0);
+  const navigate = useNavigate();
   const total = slides.length;
   const next1 = (index + 1) % total;
   const next2 = (index + 2) % total;
@@ -64,7 +66,7 @@ export default function Landing() {
         <div className="top-header">
           <h1>MOVEMENT THAT INSPIRES YOU TO KEEP MOVING</h1>
           <p>JOIN OUR TEAM TODAY OR LOG IN</p>
-          <button>
+          <button onClick={() => navigate("/authentication")}>
             <span>LOGIN / REGISTER</span>
           </button>
         </div>
