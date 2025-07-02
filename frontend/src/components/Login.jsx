@@ -35,6 +35,7 @@ const Login = ({ onSwitch }) => {
       localStorage.setItem("user", JSON.stringify(user));
 
       setMessage("✅ Successfully logged in! Redirecting...");
+      console.log(localStorage.getItem("user"));
 
       // Delay navigation for 2.5 seconds
       setTimeout(() => {

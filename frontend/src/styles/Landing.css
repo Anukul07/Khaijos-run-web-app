@@ -53,6 +53,13 @@ header {
     max-height: 100%;
   }
 }
+@media screen and (max-height: 850px) {
+  .logo-image {
+    width: clamp(12rem, 24vw, 13rem);
+    height: auto;
+    max-height: 100%;
+  }
+}
 /* ****************************Main Section************************ */
 
 main {
