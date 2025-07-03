@@ -1,73 +1,83 @@
-.map-container {
-  width: 65%;
-  height: 100%;
-  padding: 4rem 2rem;
+.leaflet-map-container {
+  flex: 1 1 500px;
+  min-width: 300px;
+
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  overflow: hidden;
   background-color: #000000;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+  width: 48%;
 }
 
 .top-prompt {
   background-color: #000000;
   color: white;
-  padding: 0.5rem;
+  padding: 0.6rem 1rem;
   text-align: center;
   border-radius: 8px;
-  font-size: 2rem;
+  font-size: 1.8rem;
+  word-break: break-word;
 }
 
 .map-box {
   flex: 1;
-  width: 90%;
+  width: 100%;
+  max-width: 800px;
+  height: 300px;
+  margin: 0 auto;
   border-radius: 12px;
   overflow: hidden;
-  margin: 0 auto;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.932);
+  box-shadow: 0 0 20px rgb(255, 255, 255);
 }
 
 .leaflet-map {
   width: 100%;
   height: 100%;
+  min-height: 300px;
 }
+
+/* Tablet View */
 @media screen and (max-width: 1024px) {
-  .map-container {
+  .leaflet-map-container {
     width: 100%;
-    padding: 1.5rem;
-    height: 400px; /* ⬆️ Increased height */
+    padding: 2rem 1.5rem;
+    height: 400px;
   }
 
   .map-box {
     width: 100%;
-    height: 100%;
-    border-radius: 8px;
+    border-radius: 10px;
   }
 
   .top-prompt {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 }
 
+/* Mobile View */
 @media screen and (max-width: 768px) {
-  .map-container {
-    height: 380px; /* ⬆️ More space for mobile interaction */
+  .leaflet-map-container {
     padding: 1rem;
+    height: 360px;
+    width: 100%;
+  }
+
+  .top-prompt {
+    font-size: 1.3rem;
+    padding: 0.5rem;
   }
 
   .map-box {
     width: 100%;
-    height: 100%;
-  }
-
-  .top-prompt {
-    font-size: 1.4rem;
   }
 }
 
+/* Small Phones */
 @media screen and (max-width: 480px) {
-  .map-container {
-    height: 320px; /* ⬆️ Still decent size for small phones */
+  .leaflet-map-container {
+    height: 320px;
     padding: 0.8rem;
   }
 

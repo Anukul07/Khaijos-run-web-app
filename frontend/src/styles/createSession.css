@@ -6,6 +6,8 @@
   gap: 1rem;
   background-color: #000;
   color: white;
+  max-height: 100vh;
+  overflow-y: auto;
 }
 
 .create-session-top {
@@ -62,16 +64,21 @@
 }
 
 .create-session-main {
-  flex: 1;
   display: flex;
-  background-color: aliceblue;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .create-session-form {
-  width: 35%;
-  height: 100%;
-  padding: 0 2rem;
-  background-color: #000000;
+  flex: 1 1 500px;
+  max-width: 800px;
+  width: 48%;
+  padding: 1.5rem;
+  background-color: #000;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -95,9 +102,9 @@
   width: 100%;
   border-bottom: 1px solid rgba(126, 126, 126, 0.616);
   padding: 2rem;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  gap: 6rem;
+  gap: 2rem;
 }
 .details-box {
   display: flex;
@@ -110,7 +117,7 @@
   gap: 1rem;
   justify-content: center;
   align-items: center;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   letter-spacing: 2px;
   font-weight: 200;
 }
@@ -222,6 +229,7 @@
 .form-row {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 2rem;
   margin-top: 2rem;
 }
@@ -234,7 +242,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
-  flex: 1;
+  flex: 1 1 240px;
 }
 
 /* Side Label Fields */
@@ -407,6 +415,7 @@
   width: 240px;
   background-color: #111;
   border-radius: 12px;
+  flex: 1 1 240px;
   padding: 1rem;
   text-align: center;
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.575);
@@ -516,318 +525,131 @@
   background-color: aqua;
   overflow: hidden;
 }
-@media screen and (max-width: 1600px) {
-  .form-row.split {
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
-  }
 
-  .input-column {
-    width: 100%;
-    max-width: 420px;
-    align-items: center;
-  }
-
-  .distance-box {
-    align-self: center;
-    width: 100%;
-    max-width: 360px;
-  }
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(220, 220, 220, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.success-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(55, 55, 55, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@media screen and (max-width: 1024px) {
+.success-modal-box {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+  background-color: #000;
+  padding: 4rem 3rem;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  width: 80%;
+  max-width: 600px;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.success-message {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.success-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form-error-message {
+  color: red;
+  font-weight: 500;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
   .create-session-main {
     flex-direction: column;
+    gap: 2rem;
   }
-
   .create-session-form,
   .create-session-map {
     width: 100%;
-    padding: 1rem;
+    padding: 1.5rem;
+  }
+  .form-card {
+    margin-bottom: 6rem; /* give space to modal if opened */
   }
 
-  .create-session-map {
-    height: 300px;
-  }
-
-  /* Form Card Top Alignment */
-  .form-card-top p {
-    font-size: 1.6rem;
-    text-align: center;
-    word-wrap: break-word;
-  }
-
-  /* Start/Finish Inputs */
-  .form-group.readonly-with-button input {
-    font-size: 1.1rem;
-    padding: 1rem;
-  }
-
-  .select-btn {
-    font-size: 1.1rem;
-    padding: 0 1rem;
-  }
-
-  /* Schedule/Time/Pace Inputs Rowed & Centered */
-  .input-column {
-    align-items: center;
-    width: 100%;
-    max-width: 380px;
-  }
-
-  .form-group.side-label {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.6rem;
-    width: 100%;
-  }
-
-  .form-group.side-label label {
-    font-size: 1.2rem;
-    min-width: 90px;
-    text-align: right;
-  }
-
-  .input-icon-wrapper .custom-input,
-  .form-group.side-label input {
-    width: 140px;
-    font-size: 1.1rem;
-    padding: 0.8rem 1rem;
-  }
-
-  .time-picker-wrapper {
-    max-width: 150px;
-    width: 100%;
-  }
-
-  .react-time-picker__inputGroup__input {
-    font-size: 1.1rem;
-    width: 30px;
-  }
-
-  /* Pace */
-  .input-with-unit {
-    max-width: 150px;
-    justify-content: center;
-  }
-
-  .unit-label {
-    font-size: 1rem;
-    padding: 0.8rem;
+  .form-row.split {
+    flex-direction: column;
+    gap: 2rem;
   }
 
   .distance-box {
-    margin-top: 2rem;
-    max-width: 320px;
-    align-self: center;
-  }
-
-  .shared-create-button {
     width: 100%;
-    justify-content: center;
-  }
-  .custom-select {
-    font-size: 1.1rem;
-    padding: 0.8rem 1rem;
-    width: 140px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .create-session-form {
-    padding: 1rem;
   }
 
-  .create-session-map {
-    height: 250px;
-  }
-
-  .details-box p {
-    font-size: 1.2rem;
+  .details {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
   }
 
   .details-img img {
     height: 80px;
     width: 80px;
   }
-
-  .details-card-p {
-    font-size: 1.6rem;
-  }
-
-  .details-icon {
-    height: 16px;
-  }
-
-  .form-group.readonly-with-button input {
-    font-size: 1rem;
-  }
-
-  .select-btn {
-    font-size: 1rem;
-    padding: 0 0.8rem;
-  }
-
-  .distance-box {
-    max-width: 320px;
-    padding: 0.8rem;
-  }
-
-  .distance-label {
-    font-size: 1.2rem;
-  }
-
-  .distance-pill {
-    font-size: 1rem;
-  }
-
-  .form-card-top p {
-    font-size: 1.4rem;
-  }
-  .custom-select {
-    font-size: 1rem;
-    padding: 0.7rem;
-    width: 130px;
-  }
 }
-@media screen and (max-width: 768px) {
-  .form-row.split {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .input-column {
-    width: 100%;
-    max-width: 350px;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .form-group.side-label {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.6rem;
-    width: 100%;
-  }
-
-  .form-group.side-label label {
-    font-size: 1.1rem;
-    min-width: 85px;
-    text-align: right;
-  }
-
-  .form-group.side-label input,
-  .input-icon-wrapper .custom-input {
-    font-size: 1rem;
-    padding: 0.8rem;
-    width: 130px;
-  }
-
-  .time-picker-wrapper {
-    max-width: 140px;
-  }
-
-  .react-time-picker__inputGroup__input {
-    font-size: 1rem;
-    width: 26px;
-  }
-
-  .input-with-unit {
-    max-width: 140px;
-  }
-
-  .unit-label {
-    font-size: 0.95rem;
-    padding: 0.7rem;
-  }
-
-  .distance-box {
-    width: 220px;
-    margin-top: 1.5rem;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .create-session-form,
-  .create-session-map {
-    padding: 0.8rem;
-  }
-
-  .create-session-map {
-    height: 200px;
-  }
-
-  .details-box p {
-    font-size: 1rem;
-  }
-
-  .details-img img {
-    height: 60px;
-    width: 60px;
-  }
-
-  .details-icon {
-    height: 14px;
-  }
-
-  .details-card-p {
-    font-size: 1.4rem;
-  }
-
+@media (max-width: 768px) {
   .form-group.side-label {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
   }
-
   .form-group.side-label label {
     width: auto;
-    font-size: 1rem;
+    margin-bottom: 0.4rem;
   }
-
-  .form-card-top p {
-    font-size: 1.2rem;
-  }
-
+  .run-session-button,
   .shared-create-button {
-    font-size: 1.2rem;
     padding: 1rem 2rem;
-    width: 100%;
+    font-size: 1.2rem;
   }
-  .custom-select {
-    font-size: 0.95rem;
-    padding: 0.6rem;
-    width: 110px;
+  .details-box p {
+    font-size: 1.4rem;
   }
 }
-@media screen and (max-width: 480px) {
-  .input-column {
-    max-width: 320px;
-    gap: 0.8rem;
-  }
-
-  .form-group.side-label label {
+@media (max-width: 480px) {
+  .run-session-button,
+  .shared-create-button {
+    padding: 0.8rem 1.5rem;
     font-size: 1rem;
-    min-width: 80px;
   }
-
-  .form-group.side-label input,
-  .input-icon-wrapper .custom-input {
-    width: 110px;
-    font-size: 0.95rem;
-    padding: 0.7rem;
+  .form-card-btm {
+    padding: 1rem;
   }
-
-  .unit-label {
-    font-size: 0.9rem;
-    padding: 0.6rem;
+  .details-img img {
+    height: 80px;
+    width: 80px;
   }
-
-  .distance-box {
-    width: 200px;
-    margin-top: 1rem;
+  .details-box p {
+    font-size: 1.2rem;
   }
 }

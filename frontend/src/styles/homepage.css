@@ -1,7 +1,7 @@
 .homepage-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #000; /* optional */
   color: white; /* if needed */
 }
@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 2rem;
+  padding: 2rem 6rem;
   min-height: 0;
 }
 
@@ -23,6 +23,8 @@
 /* create button icon */
 .top-area button {
   position: relative;
+  max-width: 100%;
+  flex-shrink: 0;
   color: white;
   padding: 1.2rem 4rem;
   font-size: 1.6rem;
@@ -39,6 +41,7 @@
   align-items: center;
   gap: 1rem;
   z-index: 1;
+  font-size: clamp(1rem, 1.5vw, 1.6rem);
 }
 
 .top-area button::before {
@@ -69,27 +72,249 @@
 }
 
 .button-icon {
-  height: 20px;
-  width: 20px;
+  max-width: 100%;
+  height: auto;
   z-index: 2;
 }
 
 /* main area */
 .main-area {
   flex: 1;
-  background-color: aliceblue;
   display: flex;
+  /* flex-wrap: wrap; */
   min-height: 0;
+  width: 100%;
+  justify-content: space-between;
+  gap: 3rem;
 }
 .sessions {
-  width: 50%;
-  background-color: #20243f;
+  flex: 0 0 35%;
+  background: radial-gradient(circle at top right, #313c46 20%, #0f2938 84%);
+  height: auto;
+  overflow-y: auto;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  font-weight: 300;
+  min-width: 280px;
+}
+.sessions-panel {
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  gap: 4rem;
   overflow-y: auto;
 }
-.map {
-  width: 50%;
-  background-color: aqua;
-  height: 100%;
+
+/* Section titles */
+.section-title {
+  font-family: inherit;
+  font-size: 2.2rem;
+  font-weight: 400;
+  margin-bottom: 1.2rem;
+}
+
+/* Joined Sessions: Vertical scroll */
+.joined-section {
+  flex: 1;
+  overflow-y: auto;
+  text-align: center;
+  border-bottom: 1px solid white;
+  max-height: 40vh;
+  padding-bottom: 1rem;
+}
+.joined-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem 1rem;
+}
+
+/* Upcoming Sessions: Horizontal scroll */
+.upcoming-section {
+  flex-shrink: 0;
+  text-align: center;
+}
+.upcoming-cards {
+  display: flex;
+  gap: 1.2rem;
+  overflow-x: auto;
+  padding: 1rem 1rem;
+}
+
+/* Shared session card styles */
+.session-card {
+  position: relative;
+  padding: 1.2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  min-width: 90%;
+  max-width: 100%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  font-size: 1.4rem;
+  font-weight: 200;
+}
+
+.session-card p {
+  margin-top: 4px;
+  text-align: left;
+}
+
+.upcoming-cards .session-card {
+  min-width: 260px;
+  max-width: 320px;
+}
+
+/* Selection gradient border */
+.session-card.selected {
+  border: 2px solid;
+  border-radius: 12px;
+  border-image: linear-gradient(to right, #d8faf6, #9893d8) 1;
+}
+
+/* Timer */
+.timer-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  gap: 1rem;
+}
+.timer-label {
+  font-weight: 600;
+}
+.timer-box {
+  background: #222;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+}
+.trainer-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #0f0;
+  color: #000;
+  padding: 0.3rem 0.7rem;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  max-width: 80px;
+  text-align: center;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
+  z-index: 2;
+}
+
+/* Actions */
+#session-action {
+  text-align: center;
+  margin-top: 0.8rem;
+  color: #d86b6b;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#session-action:hover {
+  text-decoration: underline;
+  opacity: 0.9;
+}
+
+.trainer-detail {
+  text-align: center;
+  color: #7ad1ec;
+  margin-top: 0.8rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.homepage-map {
+  flex: 0 0 65%;
+  background-color: aqua;
+  height: auto;
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .main-content {
+    padding: 2rem;
+  }
+
+  .main-area {
+    flex-direction: column; /* Stack map below sessions */
+  }
+
+  .sessions,
+  .homepage-map {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 1rem;
+  }
+
+  .main-area {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .sessions,
+  .map {
+    width: 100%;
+    height: auto;
+    min-width: unset;
+  }
+
+  .session-card {
+    min-width: 100%;
+  }
+
+  .upcoming-cards {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+}
+@media (max-width: 500px) {
+  .trainer-tag {
+    top: auto;
+    bottom: 10px;
+    right: 10px;
+    font-size: 1rem;
+    padding: 0.2rem 0.6rem;
+  }
+
+  .session-card {
+    padding-top: 2rem; /* add breathing space at top if needed */
+  }
+}
+/* Global scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px; /* thin scrollbar */
+  height: 6px; /* for horizontal scroll */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Optional: hide scrollbar buttons (up/down arrows) */
+::-webkit-scrollbar-button {
+  display: none;
 }

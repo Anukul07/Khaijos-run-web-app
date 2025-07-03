@@ -14,6 +14,7 @@ import emailIcon from "../assets/Homepage/create-session/ic_baseline-email.svg";
 import profilePic from "./../assets/Navigation/profile.png";
 import Map from "./common/Map";
 import PolylinePreview from "./common/PolylinePreview";
+import axios from "axios";
 
 export default function CreateSession({ onCancel }) {
   const [scheduledDate, setScheduledDate] = useState(null);
@@ -28,11 +29,74 @@ export default function CreateSession({ onCancel }) {
   const [endAddress, setEndAddress] = useState("Select a finish line on map");
   const [routePath, setRoutePath] = useState([]);
   const [userData, setUserData] = useState(null);
+  const [pace, setPace] = useState("");
+  const [totalSlots, setTotalSlots] = useState(25);
+  const [validationError, setValidationError] = useState("");
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  useEffect(() => {
+    if (showSuccessModal) {
+      document.body.style.overflow = "hidden";
+
+      const timer = setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [showSuccessModal]);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     setUserData(user);
   }, []);
+  const handleCreateSession = async () => {
+    if (
+      !startCoords ||
+      !endCoords ||
+      !scheduledDate ||
+      !scheduledTime ||
+      !pace ||
+      !routePath.length ||
+      !distance
+    ) {
+      setValidationError("❌ Please fill in all session details.");
+      return;
+    }
+
+    const scheduledDateTime = new Date(
+      `${scheduledDate.toISOString().split("T")[0]}T${scheduledTime}`
+    );
+
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const response = await axios.post("http://localhost:5000/api/sessions", {
+        userId: user._id,
+        startLocation: {
+          lat: startCoords[0],
+          lng: startCoords[1],
+        },
+        endLocation: {
+          lat: endCoords[0],
+          lng: endCoords[1],
+        },
+        startAddress,
+        endAddress,
+        scheduledDateTime,
+        pace,
+        routePath,
+        totalSlots,
+        distanceKm: Number(distance),
+      });
+
+      setShowSuccessModal(true);
+    } catch (error) {
+      console.error("Failed to create session:", error);
+      alert("❌ Failed to create session.");
+    }
+  };
 
   return (
     <div className="create-session-wrapper">
@@ -210,14 +274,24 @@ export default function CreateSession({ onCancel }) {
                   <div className="form-group side-label">
                     <label htmlFor="pace">Pace</label>
                     <div className="input-with-unit ">
-                      <input type="input" id="pace" />
+                      <input
+                        type="text"
+                        id="pace"
+                        value={pace}
+                        onChange={(e) => setPace(e.target.value)}
+                      />
                       <span className="unit-label">km/hr</span>
                     </div>
                   </div>
                   {/* Total Slots */}
                   <div className="form-group side-label">
                     <label htmlFor="slots">Total Slots</label>
-                    <select id="slots" className="custom-select">
+                    <select
+                      id="slots"
+                      className="custom-select"
+                      value={totalSlots}
+                      onChange={(e) => setTotalSlots(parseInt(e.target.value))}
+                    >
                       {[...Array(21)].map((_, i) => (
                         <option key={i} value={i + 5}>
                           {i + 5}
@@ -239,7 +313,10 @@ export default function CreateSession({ onCancel }) {
                   </div>
                 </div>
               </div>
-              <div className="create-session-button">
+              <div
+                className="create-session-button"
+                onClick={handleCreateSession}
+              >
                 <button className="shared-create-button">
                   <img
                     src={createIcon}
@@ -249,6 +326,9 @@ export default function CreateSession({ onCancel }) {
                   <span>Create Session</span>
                 </button>
               </div>
+              {validationError && (
+                <p className="form-error-message">{validationError}</p>
+              )}
             </div>
           </div>
         </div>
@@ -266,6 +346,31 @@ export default function CreateSession({ onCancel }) {
           routePath={routePath}
         />
       </div>
+      {showSuccessModal && (
+        <div className="success-modal-overlay">
+          <div className="success-modal-box">
+            <p className="success-message">Session created successfully</p>
+            <div className="success-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="white"
+                height="28"
+                viewBox="0 0 24 24"
+                width="28"
+              >
+                <circle cx="12" cy="12" r="12" fill="#22c55e" />
+                <path
+                  d="M9.5 13.5l1.5 1.5 3.5-4"
+                  stroke="#fff"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
