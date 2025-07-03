@@ -10,7 +10,9 @@ import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
 import "../../styles/map.css";
 import { reverseGeocode } from "../../utils/reverseGeocode";
-import { getRoutePath } from "../../utils/getRoutePath";
+// import { getRoutePath } from "../../utils/getRoutePath";
+import { getRoutePath2 } from "../../utils/getRoutePath2";
+// import { getRoutePathWithFallback } from "../../utils/getRoutePathWithFallback";
 import startIconImg from "../../assets/Map/start-line.png";
 import endIconImg from "../../assets/Map/finish-line.png";
 
@@ -59,7 +61,7 @@ export default function Map({
   useEffect(() => {
     const fetchRoute = async () => {
       if (startCoords && endCoords) {
-        const { geoCoords, distanceKm } = await getRoutePath(
+        const { geoCoords, distanceKm } = await getRoutePath2(
           startCoords,
           endCoords
         );
@@ -77,7 +79,7 @@ export default function Map({
   };
 
   return (
-    <div className={`map-container ${activeSelection ? "active" : ""}`}>
+    <div className={`leaflet-map-container ${activeSelection ? "active" : ""}`}>
       <div className="top-prompt">
         {activeSelection && (
           <p>Please select your {activeSelection} location</p>
