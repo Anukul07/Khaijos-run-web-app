@@ -9,7 +9,7 @@ const {
 } = require("../controllers/sessionController");
 
 router.post("/", createSession);
-router.get("/joined", getJoinedSessions);
+router.post("/joined", getJoinedSessions);
 router.get("/available", getAvailableSessions);
 router.post("/join/:id", joinSession);
 

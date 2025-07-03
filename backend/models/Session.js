@@ -21,7 +21,9 @@ const sessionSchema = new mongoose.Schema(
       },
       required: true,
     },
-    distanceKm: { type: Number, required: true }, // calculated using Haversine formula
+    startAddress: { type: String, required: true },
+    endAddress: { type: String, required: true },
+    distanceKm: { type: Number, required: true },
     pace: { type: String }, // e.g., "6:00 min/km"
     scheduledDateTime: { type: Date, required: true },
     totalSlots: { type: Number, default: 20 },
