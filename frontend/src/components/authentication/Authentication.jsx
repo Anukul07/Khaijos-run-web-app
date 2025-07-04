@@ -1,10 +1,11 @@
 // src/components/Authentication/Authentication.jsx
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./../../styles/authentication.css";
+import "./authentication.css";
 import Footer from "../common/Footer";
-import Login from "../Login";
-import Registration from "../Registration";
+import Login from "./Login";
+import Registration from "./Registration";
+import AuthenticationModal from "./AuthenticationModal";
 
 const slides = [
   {
@@ -21,6 +22,8 @@ const Authentication = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const navigate = useNavigate();
   const [showLogin, setShowLogin] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -31,6 +34,16 @@ const Authentication = () => {
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+  const handleLoginSuccess = () => {
+    setModalMessage("🎉 Registration successful, redirecting to Homepage...");
+    setShowModal(true);
+    setTimeout(() => navigate("/homepage"), 2500);
+  };
+  const handleRegistrationSuccess = () => {
+    setModalMessage("🎉 Registration successful, redirecting to login...");
+    setShowModal(true);
+    setTimeout(() => setShowModal(false), 2000);
   };
 
   return (
@@ -50,12 +63,18 @@ const Authentication = () => {
         <div className="auth-left">
           <div
             className="auth-fade-container"
-            key={showLogin ? "login" : "register"} // 🔁 key forces re-render
+            key={showLogin ? "login" : "register"}
           >
             {showLogin ? (
-              <Login onSwitch={() => setShowLogin(false)} />
+              <Login
+                onSwitch={() => setShowLogin(false)}
+                onLoginSuccess={handleLoginSuccess}
+              />
             ) : (
-              <Registration onSwitch={() => setShowLogin(true)} />
+              <Registration
+                onSwitch={() => setShowLogin(true)}
+                onRegistrationSuccess={handleRegistrationSuccess}
+              />
             )}
           </div>
         </div>
@@ -86,6 +105,8 @@ const Authentication = () => {
         </div>
       </div>
       <Footer />
+      {/* Modal placed at the top level of Authentication */}
+      <AuthenticationModal show={showModal} message={modalMessage} />
     </div>
   );
 };

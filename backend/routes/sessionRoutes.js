@@ -6,11 +6,12 @@ const {
   getJoinedSessions,
   getAvailableSessions,
   joinSession,
+  cancelSession,
 } = require("../controllers/sessionController");
 
 router.post("/", createSession);
 router.post("/joined", getJoinedSessions);
-router.get("/available", getAvailableSessions);
+router.post("/available", getAvailableSessions);
 router.post("/join/:id", joinSession);
-
+router.post("/cancel/:id", cancelSession);
 module.exports = router;

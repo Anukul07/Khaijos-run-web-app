@@ -27,6 +27,7 @@ exports.createSession = async (req, res) => {
       totalSlots,
       routePath,
       distanceKm,
+      joinedRunners: [userId],
     });
 
     res.status(201).json(session);
@@ -104,6 +105,42 @@ exports.joinSession = async (req, res) => {
     await session.save();
 
     res.json({ message: "Joined successfully", session });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.cancelSession = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const sessionId = req.params.id;
+
+    if (!userId || !sessionId) {
+      return res
+        .status(400)
+        .json({ error: "User ID and session ID are required" });
+    }
+
+    const session = await Session.findById(sessionId);
+
+    if (!session) {
+      return res.status(404).json({ message: "Session not found" });
+    }
+
+    const wasJoined = session.joinedRunners.includes(userId);
+    if (!wasJoined) {
+      return res
+        .status(400)
+        .json({ message: "User is not part of this session" });
+    }
+
+    session.joinedRunners = session.joinedRunners.filter(
+      (runnerId) => runnerId.toString() !== userId
+    );
+
+    await session.save();
+
+    res.json({ message: "Successfully cancelled the session", session });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

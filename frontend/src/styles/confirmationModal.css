@@ -1,0 +1,117 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(128, 128, 128, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background-color: #111;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.modal-text,
+.modal-description {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.yes-button,
+.no-button {
+  padding: 0.9rem 2.4rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  letter-spacing: 1px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Yes Button - Dark Crimson Gradient */
+.yes-button {
+  background: linear-gradient(135deg, #7f0000, #b71c1c);
+}
+
+.yes-button:hover {
+  background: linear-gradient(135deg, #9a0007, #d50000);
+  transform: scale(1.06);
+  box-shadow: 0 6px 20px rgba(213, 0, 0, 0.6);
+}
+
+/* No Button - Dark Teal/Blue Gradient */
+.no-button {
+  background: linear-gradient(135deg, #003c8f, #01579b);
+}
+
+.no-button:hover {
+  background: linear-gradient(135deg, #004ba0, #0277bd);
+  transform: scale(1.06);
+  box-shadow: 0 6px 20px rgba(2, 119, 189, 0.5);
+}
+
+.yes-button:active,
+.no-button:active {
+  transform: scale(0.97);
+  box-shadow: none;
+}
+
+.cancel-message {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  color: #ccc;
+}
+
+.success-message {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #d0f0dc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.run-icon {
+  font-size: 2.2rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-overlay {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.modal-content {
+  animation: fadeIn 0.4s ease forwards;
+}

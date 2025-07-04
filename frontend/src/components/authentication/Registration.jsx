@@ -1,8 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
-import "../styles/registration.css";
+import "./registration.css";
 
-const Registration = ({ onSwitch }) => {
+const Registration = ({ onSwitch, onRegistrationSuccess }) => {
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -88,12 +88,12 @@ const Registration = ({ onSwitch }) => {
         }
       );
 
-      setMessage("🎉 Account created! You can now log in.");
+      onRegistrationSuccess();
       setFormData({ email: "", name: "", password: "", contact: "" });
 
       setTimeout(() => {
         onSwitch();
-      }, 3000);
+      }, 2000);
     } catch (err) {
       const errorMsg =
         err.response?.data?.message || "❌ Something went wrong. Try again.";

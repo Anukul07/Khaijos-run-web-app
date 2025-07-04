@@ -120,7 +120,7 @@
   overflow-y: auto;
   text-align: center;
   border-bottom: 1px solid white;
-  max-height: 40vh;
+  max-height: 35vh; /* increased from 40vh */
   padding-bottom: 1rem;
 }
 .joined-cards {
@@ -137,15 +137,15 @@
 }
 .upcoming-cards {
   display: flex;
-  gap: 1.2rem;
+  gap: 1.6rem; /* more spacing between cards */
   overflow-x: auto;
-  padding: 1rem 1rem;
+  padding: 1.5rem 1rem;
 }
 
 /* Shared session card styles */
 .session-card {
   position: relative;
-  padding: 1.2rem;
+  padding: 2rem 1.6rem; /* Increased padding */
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -155,6 +155,10 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   font-size: 1.4rem;
   font-weight: 200;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.6rem;
 }
 
 .session-card p {
@@ -182,28 +186,40 @@
   margin-bottom: 0.5rem;
   font-size: 1.4rem;
   gap: 1rem;
+  margin-top: 1rem;
 }
 .timer-label {
   font-weight: 600;
 }
-.timer-box {
-  background: #222;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  color: #fff;
-  font-weight: bold;
-}
+
 .trainer-tag {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #0f0;
+  top: 6px;
+  right: 7px; /* was right: 10px */
+  background: rgb(101, 163, 101);
   color: #000;
   padding: 0.3rem 0.7rem;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   border-radius: 8px;
   font-weight: 600;
-  max-width: 80px;
+  max-width: 100px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  z-index: 2;
+}
+.trainer-tag-upcoming {
+  position: absolute;
+  top: 6px;
+  right: 7px; /* was right: 10px */
+  background: rgb(101, 163, 101);
+  color: #000;
+  padding: 0.3rem 0.7rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  max-width: 100px;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
@@ -223,20 +239,157 @@
   text-decoration: underline;
   opacity: 0.9;
 }
+.session-card .scheduled-date {
+  display: inline-block;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-top: 10px;
+}
 
-.trainer-detail {
+#trainer-detail {
   text-align: center;
   color: #7ad1ec;
   margin-top: 0.8rem;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+#trainer-detail:hover {
   text-decoration: underline;
+  opacity: 0.9;
+}
+
+.join-session-button {
+  margin-top: 1rem;
+  padding: 0.8rem 2rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #20243f 0%, #3d485b 100%);
+  border: 2px solid rgba(33, 90, 110, 0.4);
+  color: white;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.join-session-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0b1035;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  border-radius: 5px;
+}
+
+.join-session-button:hover::before {
+  opacity: 1;
+}
+
+.join-session-button:hover {
+  box-shadow: 0 0 10px rgba(33, 90, 110, 0.6);
+  transform: translateY(-2px);
 }
 
 .homepage-map {
   flex: 0 0 65%;
-  background-color: aqua;
+
   height: auto;
   overflow: hidden;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.459);
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(128, 128, 128, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background-color: #111;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.modal-text {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.yes-button,
+.no-button {
+  padding: 0.9rem 2.4rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  letter-spacing: 1px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Yes Button - Dark Crimson Gradient */
+.yes-button {
+  background: linear-gradient(135deg, #7f0000, #b71c1c);
+}
+
+.yes-button:hover {
+  background: linear-gradient(135deg, #9a0007, #d50000);
+  transform: scale(1.06);
+  box-shadow: 0 6px 20px rgba(213, 0, 0, 0.6);
+}
+
+/* No Button - Dark Teal/Blue Gradient */
+.no-button {
+  background: linear-gradient(135deg, #003c8f, #01579b);
+}
+
+.no-button:hover {
+  background: linear-gradient(135deg, #004ba0, #0277bd);
+  transform: scale(1.06);
+  box-shadow: 0 6px 20px rgba(2, 119, 189, 0.5);
+}
+
+/* Optional click feedback */
+.yes-button:active,
+.no-button:active {
+  transform: scale(0.97);
+  box-shadow: none;
+}
+
+.cancel-message {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  color: #ccc;
 }
 
 @media (max-width: 1024px) {
@@ -283,14 +436,6 @@
   }
 }
 @media (max-width: 500px) {
-  .trainer-tag {
-    top: auto;
-    bottom: 10px;
-    right: 10px;
-    font-size: 1rem;
-    padding: 0.2rem 0.6rem;
-  }
-
   .session-card {
     padding-top: 2rem; /* add breathing space at top if needed */
   }

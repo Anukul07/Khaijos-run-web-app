@@ -1,0 +1,19 @@
+.dynamic-timer-box {
+  background: linear-gradient(145deg, #1f1f2e, #2a2a3b);
+  padding: 0.7rem 1.8rem;
+  border-radius: 12px;
+  color: #ffffff;
+  font-weight: 700;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 3px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+  min-width: 140px;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.dynamic-timer-box.started {
+  color: #9c7cda;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+}
