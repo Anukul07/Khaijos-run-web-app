@@ -3,6 +3,7 @@ import Landing from "./components/Landing";
 import Authentication from "./components/authentication/Authentication";
 import Homepage from "./components/Homepage";
 import "leaflet/dist/leaflet.css";
+import Trainer from "./components/Trainer";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/authentication" element={<Authentication />} />
         <Route path="/homepage" element={<Homepage />} />
+        <Route path="/trainer" element={<Trainer />} />
       </Routes>
     </Router>
   );
