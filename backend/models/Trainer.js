@@ -8,10 +8,13 @@ const trainerSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-
-    totalSessions: { type: Number, default: 0 },
-    totalAccolades: { type: Number, default: 0 },
-    personalBest: { type: String }, // e.g., "5km in 22m"
+    statsId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Stats",
+      required: true,
+      unique: true,
+    },
+    personalBest: { type: String },
   },
   { timestamps: true }
 );
