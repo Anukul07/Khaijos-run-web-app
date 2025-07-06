@@ -46,6 +46,7 @@ exports.getJoinedSessions = async (req, res) => {
 
     const sessions = await Session.find({
       joinedRunners: userId,
+      enabled: true,
     })
       .populate("creator", "name role")
       .sort({ scheduledDateTime: 1 });
@@ -141,6 +142,62 @@ exports.cancelSession = async (req, res) => {
     await session.save();
 
     res.json({ message: "Successfully cancelled the session", session });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.getCreatedSessions = async (req, res) => {
+  try {
+    const { userId } = req.body;
+
+    if (!userId) {
+      return res.status(400).json({ error: "User ID is required" });
+    }
+
+    const sessions = await Session.find({
+      creator: userId,
+    })
+      .populate("creator", "name role")
+      .sort({ scheduledDateTime: 1 });
+
+    res.json(sessions);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.markSessionCompleted = async (req, res) => {
+  try {
+    const { sessionId } = req.params;
+
+    const session = await Session.findById(sessionId);
+    if (!session) {
+      return res.status(404).json({ message: "Session not found" });
+    }
+
+    session.status = "completed";
+    await session.save();
+
+    res.json({ message: "Session marked as completed", session });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.disableSession = async (req, res) => {
+  try {
+    const { sessionId } = req.params;
+
+    const session = await Session.findById(sessionId);
+    if (!session) {
+      return res.status(404).json({ message: "Session not found" });
+    }
+
+    session.enabled = false;
+    await session.save();
+
+    res.json({ message: "Session disabled successfully", session });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

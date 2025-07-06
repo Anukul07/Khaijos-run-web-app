@@ -1,4 +1,6 @@
 const Trainer = require("../models/Trainer");
+const Stats = require("../models/Stats");
+const User = require("../models/User");
 
 exports.getTrainerProfile = async (req, res) => {
   try {
@@ -16,7 +18,13 @@ exports.getTrainerProfile = async (req, res) => {
 
 exports.createOrUpdateTrainer = async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { userId, personalBest, motivation, totalAccolades } = req.body;
+
+    if (!motivation || totalAccolades === undefined) {
+      return res.status(400).json({
+        message: "Motivation and totalAccolades are required fields.",
+      });
+    }
 
     const user = await User.findById(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
@@ -34,10 +42,12 @@ exports.createOrUpdateTrainer = async (req, res) => {
     const trainerData = {
       userId,
       statsId: stats._id,
-      personalBest: req.body.personalBest || "",
+      personalBest: personalBest || "",
+      motivation,
+      totalAccolades,
     };
 
-    let trainer = await Trainer.findOneAndUpdate({ userId }, trainerData, {
+    const trainer = await Trainer.findOneAndUpdate({ userId }, trainerData, {
       new: true,
       upsert: true,
     });
@@ -90,6 +100,20 @@ exports.updateTrainerStats = async (req, res) => {
       trainer,
       stats,
     });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+exports.getAllTrainers = async (req, res) => {
+  try {
+    const trainers = await Trainer.find()
+      .populate("userId", "name email photo")
+      .populate(
+        "statsId",
+        "totalSessionsCompleted averagePace totalDistanceRan"
+      );
+
+    res.status(200).json(trainers);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

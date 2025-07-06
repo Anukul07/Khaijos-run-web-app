@@ -11,7 +11,7 @@ import medalIcon from "../assets/Homepage/create-session/simple-icons_sessionize
 import calendarIcon from "../assets/Homepage/create-session/solar_calendar-bold.svg";
 import clockIcon from "../assets/Homepage/create-session/ri_time-fill.svg";
 import emailIcon from "../assets/Homepage/create-session/ic_baseline-email.svg";
-import profilePic from "./../assets/Navigation/profile.png";
+import profilePlaceHolder from "./../assets/Navigation/profile.jpg";
 import Map from "./common/Map";
 import PolylinePreview from "./common/PolylinePreview";
 import axios from "axios";
@@ -33,7 +33,18 @@ export default function CreateSession({ onCancel }) {
   const [totalSlots, setTotalSlots] = useState(25);
   const [validationError, setValidationError] = useState("");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [profileImage, setProfileImage] = useState(profilePlaceHolder);
 
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    setUserData(user);
+
+    if (user && user.photo) {
+      setProfileImage(`/profiles/${user.photo}`);
+    } else {
+      setProfileImage(profilePlaceHolder);
+    }
+  }, []);
   useEffect(() => {
     if (showSuccessModal) {
       document.body.style.overflow = "hidden";
@@ -166,7 +177,7 @@ export default function CreateSession({ onCancel }) {
               </div>
 
               <div className="details-img">
-                <img src={profilePic} alt="profile-img" />
+                <img src={profileImage} alt="profile-img" />
               </div>
             </div>
           </div>

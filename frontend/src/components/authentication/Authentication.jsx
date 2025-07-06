@@ -36,7 +36,7 @@ const Authentication = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
   const handleLoginSuccess = () => {
-    setModalMessage("🎉 Registration successful, redirecting to Homepage...");
+    setModalMessage("🎉 Login successful, redirecting to Homepage...");
     setShowModal(true);
     setTimeout(() => navigate("/homepage"), 2500);
   };

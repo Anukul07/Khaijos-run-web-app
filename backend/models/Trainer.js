@@ -15,6 +15,8 @@ const trainerSchema = new mongoose.Schema(
       unique: true,
     },
     personalBest: { type: String },
+    motivation: { type: String, required: true },
+    totalAccolades: { type: Number, default: 0 },
   },
   { timestamps: true }
 );
