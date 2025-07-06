@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema(
     phone: String,
     otp: String,
     otpExpiry: Date,
-    photo: { type: String },
+    photo: { type: String, default: null },
   },
   { timestamps: true }
 );

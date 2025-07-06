@@ -9,7 +9,6 @@ const statsSchema = new mongoose.Schema(
       unique: true,
     },
     totalSessionsCompleted: { type: Number, default: 0 },
-    totalAccolades: { type: Number, default: 0 }, // manually updated
     averagePace: { type: Number, default: 0 }, // in min/km, float like 6.2
     totalDistanceRan: { type: Number, default: 0 }, // in km
 

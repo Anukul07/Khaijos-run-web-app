@@ -143,7 +143,7 @@
 }
 
 /* Shared session card styles */
-.session-card {
+.homepage-session-card {
   position: relative;
   padding: 2rem 1.6rem; /* Increased padding */
   border-radius: 12px;
@@ -161,18 +161,18 @@
   gap: 0.6rem;
 }
 
-.session-card p {
+.homepage-session-card p {
   margin-top: 4px;
   text-align: left;
 }
 
-.upcoming-cards .session-card {
+.upcoming-cards .homepage-session-card {
   min-width: 260px;
   max-width: 320px;
 }
 
 /* Selection gradient border */
-.session-card.selected {
+.homepage-session-card.selected {
   border: 2px solid;
   border-radius: 12px;
   border-image: linear-gradient(to right, #d8faf6, #9893d8) 1;
@@ -239,7 +239,7 @@
   text-decoration: underline;
   opacity: 0.9;
 }
-.session-card .scheduled-date {
+.homepage-session-card .scheduled-date {
   display: inline-block;
   font-size: 1.4rem;
   font-weight: 600;
@@ -426,7 +426,7 @@
     min-width: unset;
   }
 
-  .session-card {
+  .homepage-session-card {
     min-width: 100%;
   }
 
@@ -436,7 +436,7 @@
   }
 }
 @media (max-width: 500px) {
-  .session-card {
+  .homepage-session-card {
     padding-top: 2rem; /* add breathing space at top if needed */
   }
 }

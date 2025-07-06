@@ -158,7 +158,7 @@ export default function Homepage() {
                       return (
                         <div
                           key={cardId}
-                          className={`session-card ${
+                          className={`homepage-session-card ${
                             selectedCard === cardId ? "selected" : ""
                           }`}
                           onClick={() => setSelectedCard(cardId)}
@@ -219,7 +219,7 @@ export default function Homepage() {
                       return (
                         <div
                           key={cardId}
-                          className={`session-card ${
+                          className={`homepage-session-card ${
                             selectedCard === cardId ? "selected" : ""
                           }`}
                           onClick={() => setSelectedCard(cardId)}

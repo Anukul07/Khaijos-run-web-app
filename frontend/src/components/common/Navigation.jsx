@@ -1,12 +1,17 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./../../styles/navigation.css";
 import logo from "./../../assets/Landing/Logo.png";
-import profilePic from "./../../assets/Navigation/profile.png";
+import profilePlaceHolder from "./../../assets/Navigation/profile.jpg";
 import menuIcon from "./../../assets/Navigation/menu-icon.svg";
 import bellIcon from "./../../assets/Navigation/bell-icon.svg";
 import cartIcon from "./../../assets/Navigation/cart.svg";
 import chocolateIcon from "./../../assets/Navigation/chocolate-icon.svg";
+import statsIcon from "../../assets/Navigation/wpf_statistics.svg";
+import purchaseHistoryIcon from "../../assets/Navigation/raphael_history.svg";
+import sessionIcon from "../../assets/Navigation/carbon_mobile-session.svg";
+import profileIcon from "../../assets/Navigation/iconamoon_profile-bold.svg";
+import logoutIcon from "../../assets/Navigation/tabler_logout.svg";
 
 export default function Navigation() {
   const location = useLocation();
@@ -17,6 +22,11 @@ export default function Navigation() {
   const [showMenu, setShowMenu] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const user = JSON.parse(localStorage.getItem("user")) || {};
+  const profileImageSrc = user.photo
+    ? `/profiles/${user.photo}`
+    : profilePlaceHolder;
 
   const toggleNotifications = () => {
     setShowNotifications(!showNotifications);
@@ -97,7 +107,7 @@ export default function Navigation() {
             className="profile-border hide-on-mobile"
             onClick={toggleProfile}
           >
-            <img src={profilePic} alt="Profile" className="profile-img" />
+            <img src={profileImageSrc} alt="Profile" className="profile-img" />
           </div>
 
           <div className="nav-icon drawer-toggle" onClick={toggleDrawer}>
@@ -125,13 +135,24 @@ export default function Navigation() {
         {showMenu && (
           <div className="menu-dropdown">
             <Link to="/stats" className="menu-item">
-              🧠 My Stats
+              <div className="menu-item-content">
+                My Stats
+                <img src={statsIcon} alt="statistics-icon" />
+              </div>
             </Link>
+
             <Link to="/sessions" className="menu-item">
-              🏃‍♂️ Sessions
+              <div className="menu-item-content">
+                Sessions
+                <img src={sessionIcon} alt="sessions-icon" />
+              </div>
             </Link>
+
             <Link to="/purchases" className="menu-item">
-              🧾 Purchase History
+              <div className="menu-item-content">
+                Purchase History
+                <img src={purchaseHistoryIcon} alt="purchase-history-icon" />
+              </div>
             </Link>
           </div>
         )}
@@ -139,10 +160,14 @@ export default function Navigation() {
         {showProfileDropdown && (
           <div className="profile-dropdown">
             <Link to="/profile" className="profile-item">
-              👤 Profile
+              <div className="profile-item-content">
+                Profile <img src={profileIcon} alt="profile icon" />
+              </div>
             </Link>
             <button className="profile-item logout-btn" onClick={handleLogout}>
-              🚪 Logout
+              <div className="profile-item-content">
+                Logout <img src={logoutIcon} alt="logout icon" />
+              </div>
             </button>
           </div>
         )}

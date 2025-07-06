@@ -102,7 +102,7 @@
   width: 100%;
   border-bottom: 1px solid rgba(126, 126, 126, 0.616);
   padding: 2rem;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   gap: 2rem;
 }
@@ -126,12 +126,13 @@
 }
 .details-img {
   border: 1px solid rgb(117, 117, 117);
-  border-radius: 4px;
+  border-radius: 50%;
   box-shadow: 0 4px 16px rgba(68, 68, 68, 0.664);
 }
 .details-img img {
   height: 100px;
   width: 100px;
+  border-radius: 50%;
 }
 .form-card {
   margin-top: 6px;
@@ -166,6 +167,7 @@
   border-radius: 2px;
   padding: 2rem;
   box-shadow: 0 4px 16px rgb(92, 92, 92);
+  background-color: #111;
   display: flex;
   flex-direction: column;
   gap: 2rem;

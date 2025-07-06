@@ -7,7 +7,6 @@ dotenv.config();
 
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
@@ -26,6 +25,12 @@ app.use("/api/sessions", sessionRoutes);
 
 const statsRoutes = require("./routes/statsRoutes");
 app.use("/api/stats", statsRoutes);
+
+const deliveryAddressRoutes = require("./routes/deliveryAddressRoutes");
+app.use("/api/deliveryAddress", deliveryAddressRoutes);
+
+const profileRoutes = require("./routes/userProfileRoutes");
+app.use("/api/profile", profileRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI)
