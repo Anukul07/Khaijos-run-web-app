@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./../../styles/navigation.css";
 import logo from "./../../assets/Landing/Logo.png";
 import profilePlaceHolder from "./../../assets/Navigation/profile.jpg";
@@ -12,8 +12,11 @@ import purchaseHistoryIcon from "../../assets/Navigation/raphael_history.svg";
 import sessionIcon from "../../assets/Navigation/carbon_mobile-session.svg";
 import profileIcon from "../../assets/Navigation/iconamoon_profile-bold.svg";
 import logoutIcon from "../../assets/Navigation/tabler_logout.svg";
+import { useCart } from "../common/CartContext";
 
 export default function Navigation() {
+  const { clearCart, cartItems } = useCart();
+
   const location = useLocation();
   const navigate = useNavigate();
   const isActive = (path) => location.pathname === path;
@@ -49,6 +52,7 @@ export default function Navigation() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    clearCart();
     navigate("/authentication");
   };
 
@@ -84,8 +88,15 @@ export default function Navigation() {
         </div>
 
         <div className="nav-right">
-          <div className="nav-icon gradient-hover hide-on-mobile">
-            <img src={cartIcon} alt="Cart" className="icon-img" />
+          <div className="nav-icon-wrapper" onClick={() => navigate("/cart")}>
+            <div className="nav-icon gradient-hover hide-on-mobile">
+              <img src={cartIcon} alt="Cart" className="icon-img" />
+              {cartItems.length > 0 && (
+                <div key={cartItems.length} className="cart-badge animate-fall">
+                  {cartItems.length}
+                </div>
+              )}
+            </div>
           </div>
           <div
             className={`nav-icon gradient-hover hide-on-mobile ${

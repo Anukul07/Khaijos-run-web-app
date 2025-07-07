@@ -6,6 +6,9 @@ import "leaflet/dist/leaflet.css";
 import Trainer from "./components/Trainer";
 import Profile from "./components/Profile";
 import Sessions from "./components/Sessions";
+import Shop from "./components/Shop";
+import Cart from "./components/Cart";
+import PurchaseHistory from "./components/PurchaseHistory";
 
 function App() {
   return (
@@ -17,6 +20,9 @@ function App() {
         <Route path="/trainer" element={<Trainer />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/sessions" element={<Sessions />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/purchases" element={<PurchaseHistory />} />
       </Routes>
     </Router>
   );

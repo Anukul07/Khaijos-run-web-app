@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./login.css";
 
-const Login = ({ onSwitch, onLoginSuccess }) => {
+const Login = ({ onSwitch, onLoginSuccess, onResetClick }) => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
@@ -81,8 +81,11 @@ const Login = ({ onSwitch, onLoginSuccess }) => {
           </div>
           <div className="login-form-links">
             <span>Forgot your password?</span>
-            <a href="#">Reset password</a>
+            <a onClick={onResetClick} style={{ cursor: "pointer" }}>
+              Reset password
+            </a>
           </div>
+
           <button className="login-button" type="submit" disabled={loading}>
             <span>{loading ? "Logging in..." : "Log In"}</span>
           </button>

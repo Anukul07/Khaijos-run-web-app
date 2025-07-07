@@ -244,7 +244,6 @@ export default function Homepage() {
                           </p>
                           <p>Distance: {session.distanceKm} km</p>
                           <p>Pace: {session.pace}</p>
-                          <p id="trainer-detail">Trainer Details</p>
                           <button
                             className="join-session-button"
                             onClick={() => {

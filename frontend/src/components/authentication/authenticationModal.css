@@ -1,4 +1,4 @@
-.modal-overlay {
+.authentication-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,7 +11,7 @@
   z-index: 3000;
 }
 
-.modal-content {
+.authentication-modal-content {
   background-color: #111;
   padding: 2rem 2.5rem;
   border-radius: 12px;
@@ -22,7 +22,7 @@
   z-index: 3001;
 }
 
-.modal-text {
+.authentication-modal-text {
   font-size: 1.8rem;
   font-weight: 500;
   line-height: 2.8rem;
