@@ -12,12 +12,12 @@ export default function ConfirmationModal({
   if (!show) return null;
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
+    <div className="confirmation-modal-overlay">
+      <div className="confirmation-modal-content">
         {!success ? (
           <>
-            <p className="modal-text">{message}</p>
-            <div className="modal-buttons">
+            <p className="confirmation-modal-text">{message}</p>
+            <div className="confirmation-modal-buttons">
               <button className="yes-button" onClick={onConfirm}>
                 Yes
               </button>
@@ -27,7 +27,7 @@ export default function ConfirmationModal({
             </div>
           </>
         ) : (
-          <div className="modal-text success-message">
+          <div className="confirmation-modal-text success-message">
             {successMessage}
             {icon && <span className="run-icon">{icon}</span>}
           </div>

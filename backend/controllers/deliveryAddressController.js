@@ -59,3 +59,25 @@ exports.getDeliveryAddressByUser = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.getDeliveryAddressById = async (req, res) => {
+  try {
+    const { deliveryAddressId } = req.body;
+
+    if (!deliveryAddressId) {
+      return res
+        .status(400)
+        .json({ message: "Delivery address ID is required" });
+    }
+
+    const deliveryAddress = await DeliveryAddress.findById(deliveryAddressId);
+
+    if (!deliveryAddress) {
+      return res.status(404).json({ message: "Delivery address not found" });
+    }
+
+    res.status(200).json(deliveryAddress);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

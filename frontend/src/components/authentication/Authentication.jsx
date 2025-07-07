@@ -6,6 +6,7 @@ import Footer from "../common/Footer";
 import Login from "./Login";
 import Registration from "./Registration";
 import AuthenticationModal from "./AuthenticationModal";
+import PasswordReset from "./PasswordReset";
 
 const slides = [
   {
@@ -21,7 +22,8 @@ const slides = [
 const Authentication = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const navigate = useNavigate();
-  const [showLogin, setShowLogin] = useState(true);
+  // const [showLogin, setShowLogin] = useState(true);
+  const [view, setView] = useState("login");
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   useEffect(() => {
@@ -45,6 +47,14 @@ const Authentication = () => {
     setShowModal(true);
     setTimeout(() => setShowModal(false), 2000);
   };
+  const handleResetComplete = () => {
+    setModalMessage("🔐 Password reset successfully. Redirecting to login...");
+    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(false);
+      setView("login");
+    }, 2500);
+  };
 
   return (
     <div className="auth-wrapper">
@@ -61,19 +71,24 @@ const Authentication = () => {
       <div className="auth-container">
         {/* Left side - Auth Box */}
         <div className="auth-left">
-          <div
-            className="auth-fade-container"
-            key={showLogin ? "login" : "register"}
-          >
-            {showLogin ? (
+          <div className="auth-fade-container" key={view}>
+            {view === "login" && (
               <Login
-                onSwitch={() => setShowLogin(false)}
+                onSwitch={() => setView("register")}
                 onLoginSuccess={handleLoginSuccess}
+                onResetClick={() => setView("reset")}
               />
-            ) : (
+            )}
+            {view === "register" && (
               <Registration
-                onSwitch={() => setShowLogin(true)}
+                onSwitch={() => setView("login")}
                 onRegistrationSuccess={handleRegistrationSuccess}
+              />
+            )}
+            {view === "reset" && (
+              <PasswordReset
+                onResetComplete={handleResetComplete}
+                goToLogin={() => setView("login")}
               />
             )}
           </div>
