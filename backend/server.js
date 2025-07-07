@@ -38,8 +38,6 @@ app.use("/api/products", productRoutes);
 const orderRoutes = require("./routes/orderRoutes");
 app.use("/api/orders", orderRoutes);
 
-console.log("EMAIL_USER:", process.env.EMAIL_PASS);
-
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected ✅"))

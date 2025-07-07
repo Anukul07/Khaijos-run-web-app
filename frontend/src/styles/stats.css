@@ -1,0 +1,49 @@
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: black;
+}
+
+.stats-container > .navigation-wrapper,
+.stats-container > nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.stats-main-container {
+  flex-grow: 1;
+  padding: 2rem;
+  color: white;
+}
+
+.stats-container > footer {
+  margin-top: auto;
+}
+.stats-content {
+  background: radial-gradient(circle at top right, #313c46 20%, #0f2938 84%);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.year-filter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  color: white;
+  font-size: 1.7rem;
+}
+
+.year-filter select {
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #2b2b2b;
+  color: white;
+}
