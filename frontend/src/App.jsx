@@ -9,6 +9,8 @@ import Sessions from "./components/Sessions";
 import Shop from "./components/Shop";
 import Cart from "./components/Cart";
 import PurchaseHistory from "./components/PurchaseHistory";
+import Stats from "./components/Stats";
+import KhaltiOverlay from "./components/KhaltiOverlay";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/purchases" element={<PurchaseHistory />} />
+        <Route path="/stats" element={<Stats />} />
+        <Route path="/khalti" element={<KhaltiOverlay />} />
       </Routes>
     </Router>
   );

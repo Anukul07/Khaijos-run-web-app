@@ -14,10 +14,12 @@ import { FaMoneyBillAlt } from "react-icons/fa";
 import khaltiLogo from "../assets/Cart/khalti-logo.png";
 import OrderConfirmationModal from "./common/OrderConfirmationModal";
 import { FaCheckCircle } from "react-icons/fa";
+import KhaltiOverlay from "./KhaltiOverlay";
 
 export default function Cart() {
   const navigate = useNavigate();
   const [paymentMethod, setPaymentMethod] = useState("cash");
+  const [showKhaltiOverlay, setShowKhaltiOverlay] = useState(false);
   const { cartItems, removeFromCart, clearCart } = useCart();
   const [deliveryAddress, setDeliveryAddress] = useState(null);
   const user = JSON.parse(localStorage.getItem("user")) || {};
@@ -64,10 +66,11 @@ export default function Cart() {
     if (paymentMethod === "cash") {
       setShowConfirmation(true);
     } else if (paymentMethod === "khalti") {
-      // Placeholder for future modal
-      alert("Khalti payment flow coming soon!");
+      setShowModal(false); // Close the order modal
+      setShowKhaltiOverlay(true); // Open Khalti overlay
     }
   };
+
   const handleConfirmOrder = async () => {
     try {
       const orderData = selectedItem
@@ -109,6 +112,43 @@ export default function Cart() {
       alert("Order failed. Try again.");
     }
   };
+  const handleKhaltiPayment = async () => {
+    try {
+      const orderData = selectedItem
+        ? {
+            userId,
+            productId: selectedItem.productId,
+            deliveryAddressId: deliveryAddress._id,
+            quantity: selectedItem.quantity,
+            paymentType: "khalti",
+            totalPrice: selectedItem.price * selectedItem.quantity,
+          }
+        : cartItems.map((item) => ({
+            userId,
+            productId: item.productId,
+            deliveryAddressId: deliveryAddress._id,
+            quantity: item.quantity,
+            paymentType: "khalti",
+            totalPrice: item.price * item.quantity,
+          }));
+
+      if (Array.isArray(orderData)) {
+        for (const order of orderData) {
+          await axios.post("http://localhost:5000/api/orders/create", order);
+        }
+      } else {
+        await axios.post("http://localhost:5000/api/orders/create", orderData);
+      }
+
+      clearCart();
+      setShowKhaltiOverlay(false);
+      navigate("/cart"); // Redirect to cart after success
+    } catch (error) {
+      console.error("Khalti order failed:", error);
+      alert("Khalti payment failed. Please try again.");
+    }
+  };
+
   return (
     <div className="cart-component">
       <Navigation />
@@ -391,6 +431,30 @@ export default function Cart() {
             icon={<FaCheckCircle style={{ color: "#2e7d32" }} />}
           />
         </div>
+      )}
+      {showKhaltiOverlay && (
+        <KhaltiOverlay
+          onClose={() => setShowKhaltiOverlay(false)}
+          amount={
+            selectedItem
+              ? selectedItem.price * selectedItem.quantity
+              : totalAmount
+          }
+          orderSummary={
+            selectedItem
+              ? [
+                  {
+                    name: selectedItem.productName,
+                    price: selectedItem.price * selectedItem.quantity,
+                  },
+                ]
+              : cartItems.map((item) => ({
+                  name: item.productName,
+                  price: item.price * item.quantity,
+                }))
+          }
+          onPayNow={handleKhaltiPayment}
+        />
       )}
     </div>
   );
