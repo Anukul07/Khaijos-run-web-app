@@ -2,7 +2,7 @@ import axios from "axios";
 import polyline from "@mapbox/polyline"; // npm install @mapbox/polyline
 
 const MAPBOX_TOKEN =
-  "pk.eyJ1IjoiYW51a3VsMDAiLCJhIjoiY21jbmVjZ2liMHBhYjJqc2QwMXV1MmZyMiJ9.VGQQts0xtZqmL3cOftRyaQ";
+  "#";
 
 export const getRoutePath2 = async (startCoords, endCoords) => {
   const start = `${startCoords[1]},${startCoords[0]}`;
