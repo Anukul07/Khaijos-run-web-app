@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const OPENCAGE_API_KEY = "5d632c93951246de8abf27fc9fe34148";
+const OPENCAGE_API_KEY = "#";
 
 export const reverseGeocode = async (lat, lng) => {
   try {
