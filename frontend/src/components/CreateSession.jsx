@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from "react-time-picker";
 import "react-time-picker/dist/TimePicker.css";
 import createSession from "../assets/Homepage/create-session.svg";
@@ -15,6 +13,8 @@ import profilePlaceHolder from "./../assets/Navigation/profile.jpg";
 import Map from "./common/Map";
 import PolylinePreview from "./common/PolylinePreview";
 import axios from "axios";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function CreateSession({ onCancel }) {
   const [scheduledDate, setScheduledDate] = useState(null);
@@ -34,6 +34,13 @@ export default function CreateSession({ onCancel }) {
   const [validationError, setValidationError] = useState("");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [profileImage, setProfileImage] = useState(profilePlaceHolder);
+  function convertTo24Hour(timeStr) {
+    const [time, modifier] = timeStr.split(" ");
+    let [hours, minutes] = time.split(":");
+    if (modifier === "PM" && hours !== "12") hours = String(+hours + 12);
+    if (modifier === "AM" && hours === "12") hours = "00";
+    return `${hours}:${minutes}`;
+  }
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -188,7 +195,7 @@ export default function CreateSession({ onCancel }) {
             <div className="form-card-btm">
               {/* Start Line */}
               <div className="form-group readonly-with-button">
-                <label className="static-label">Start Line</label>
+                <label id="static-label">Start Line</label>
                 <div className="input-button-wrapper">
                   <input type="text" value={startAddress} readOnly />
                   <button
@@ -215,7 +222,7 @@ export default function CreateSession({ onCancel }) {
 
               {/* Finish Line */}
               <div className="form-group readonly-with-button">
-                <label className="static-label">Finish Line</label>
+                <label id="static-label">Finish Line</label>
                 <div className="input-button-wrapper">
                   <input type="text" value={endAddress} readOnly />
                   <button
@@ -246,69 +253,105 @@ export default function CreateSession({ onCancel }) {
                   {/* Scheduled On */}
                   <div className="form-group side-label">
                     <label htmlFor="scheduledDate">Scheduled On</label>
-                    <div className="input-icon-wrapper">
-                      <DatePicker
-                        selected={scheduledDate}
-                        onChange={(date) => setScheduledDate(date)}
-                        dateFormat="yyyy-MM-dd"
-                        placeholderText="Select date"
-                        className="custom-input"
-                      />
-                      <img
-                        src={calendarIcon}
-                        alt="Calendar"
-                        className="icon-inside-input"
+                    <div className="input-shadow-wrapper">
+                      <input
+                        type="date"
+                        id="scheduledDate"
+                        value={
+                          scheduledDate
+                            ? scheduledDate.toISOString().split("T")[0]
+                            : ""
+                        }
+                        onChange={(e) =>
+                          setScheduledDate(new Date(e.target.value))
+                        }
+                        min={new Date().toISOString().split("T")[0]}
+                        className="custom-shadow-input"
                       />
                     </div>
                   </div>
 
+                  {/* Time */}
                   <div className="form-group side-label">
                     <label htmlFor="scheduledTime">Time</label>
-                    <div className="input-icon-wrapper time-picker-wrapper">
-                      <TimePicker
-                        onChange={setScheduledTime}
-                        value={scheduledTime}
-                        clearIcon={null}
-                        clockIcon={null}
-                        format="HH:mm"
-                        disableClock={true}
-                      />
-                      <img
-                        src={clockIcon}
-                        alt="Clock"
-                        className="icon-inside-input"
-                      />
+                    <div className="input-shadow-wrapper">
+                      <select
+                        id="scheduledTime"
+                        value={scheduledTime || ""}
+                        onChange={(e) => setScheduledTime(e.target.value)}
+                        className="custom-shadow-input custom-select-time"
+                      >
+                        <option value="" disabled hidden>
+                          Select Time
+                        </option>
+                        {[
+                          "05:00 AM",
+                          "05:30 AM",
+                          "06:00 AM",
+                          "06:30 AM",
+                          "07:00 AM",
+                          "07:30 AM",
+                          "08:00 AM",
+                          "08:30 AM",
+                          "09:00 AM",
+                          "09:30 AM",
+                          "10:00 AM",
+                          "04:00 PM",
+                          "04:30 PM",
+                          "05:00 PM",
+                          "05:30 PM",
+                          "06:00 PM",
+                          "06:30 PM",
+                          "07:00 PM",
+                        ].map((time) => (
+                          <option key={time} value={convertTo24Hour(time)}>
+                            {time}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </div>
 
                   {/* Pace */}
                   <div className="form-group side-label">
                     <label htmlFor="pace">Pace</label>
-                    <div className="input-with-unit ">
+                    <div className="input-shadow-wrapper input-with-unit-wrapper">
                       <input
                         type="text"
                         id="pace"
+                        placeholder="Enter pace"
                         value={pace}
-                        onChange={(e) => setPace(e.target.value)}
+                        onChange={(e) =>
+                          setPace(e.target.value.replace(/[^0-9.]/g, ""))
+                        }
+                        className="custom-shadow-input with-unit"
                       />
-                      <span className="unit-label">km/hr</span>
+                      <span className="unit-label-inside">km/hr</span>
                     </div>
                   </div>
+
                   {/* Total Slots */}
                   <div className="form-group side-label">
                     <label htmlFor="slots">Total Slots</label>
-                    <select
-                      id="slots"
-                      className="custom-select"
-                      value={totalSlots}
-                      onChange={(e) => setTotalSlots(parseInt(e.target.value))}
-                    >
-                      {[...Array(21)].map((_, i) => (
-                        <option key={i} value={i + 5}>
-                          {i + 5}
+                    <div className="input-shadow-wrapper">
+                      <select
+                        id="slots"
+                        value={totalSlots}
+                        onChange={(e) =>
+                          setTotalSlots(parseInt(e.target.value))
+                        }
+                        className="custom-shadow-input custom-select-time"
+                      >
+                        <option value="" disabled hidden>
+                          Select Slots
                         </option>
-                      ))}
-                    </select>
+                        {[...Array(21)].map((_, i) => (
+                          <option key={i} value={i + 5}>
+                            {i + 5}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                 </div>
 

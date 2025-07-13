@@ -8,6 +8,8 @@
   border-radius: 12px;
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
   width: 48%;
+  padding: 1rem;
+  height: auto;
 }
 
 .top-prompt {
