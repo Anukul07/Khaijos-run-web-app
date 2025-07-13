@@ -233,7 +233,7 @@
 }
 
 .size-box.unavailable {
-  color: #ff4c4c;
+  color: #ffffff;
   text-decoration: line-through;
   cursor: not-allowed;
 }

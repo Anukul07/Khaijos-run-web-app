@@ -61,14 +61,12 @@ export default function Shop() {
       return false;
     }
 
-    // Filter by gender
     if (selectedFilter === "Men") {
       if (!product.productType.includes("Men's")) return false;
     } else if (selectedFilter === "Women") {
       if (!product.productType.includes("Women's")) return false;
     }
 
-    // Filter by size range
     const sizeMap = {
       "Size 34-38": ["34", "35", "36", "37", "38"],
       "Size 39-41": ["39", "40", "41"],
@@ -136,12 +134,11 @@ export default function Shop() {
         <div className="product-section">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
-              <div
-                key={product._id}
-                className="product-card"
-                onClick={() => openModal(product)}
-              >
-                <div className="product-image-container">
+              <div key={product._id} className="product-card">
+                <div
+                  className="product-image-container"
+                  onClick={() => openModal(product)}
+                >
                   <img
                     src={`/shoes/${product.productImage}`}
                     alt={product.productName}
@@ -292,13 +289,31 @@ export default function Shop() {
                       Quantity:
                     </label>
                     <input
-                      type="number"
+                      type="text"
                       id="quantity"
-                      min="1"
-                      max="10"
                       value={quantity}
-                      onChange={(e) => setQuantity(Number(e.target.value))}
+                      onChange={(e) => {
+                        const value = e.target.value.trim();
+
+                        // Only allow numeric input
+                        if (!/^\d*$/.test(value)) return;
+
+                        const num = Number(value);
+
+                        // Allow only 1 to 10, or empty string (for controlled input)
+                        if (value === "" || (num >= 1 && num <= 10)) {
+                          setQuantity(value);
+                        }
+                      }}
+                      onBlur={() => {
+                        // Enforce min of 1 if input left empty or zero
+                        if (quantity === "" || Number(quantity) < 1) {
+                          setQuantity(1);
+                        }
+                      }}
                       className="quantity-input"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                     />
                   </div>
                 </div>

@@ -27,7 +27,7 @@
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
   max-width: 900px;
-  margin: 0 auto;
+  margin: 10vh auto;
 }
 
 .year-filter {

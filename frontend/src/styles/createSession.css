@@ -138,11 +138,6 @@
   margin-top: 6px;
   height: 75%;
   width: 100%;
-  /* background: radial-gradient(circle at 10% 20%, #011724 20%, transparent 40%),
-    radial-gradient(circle at 80% 30%, #182430 20%, transparent 70%),
-    radial-gradient(circle at 50% 80%, #47161d 15%, transparent 60%), #0f2938;
-  background-blend-mode: screen; */
-  /* box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4); */
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -170,14 +165,13 @@
   background-color: #111;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 /* Start & Finish Line Fields */
 .form-group.readonly-with-button {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
 }
 
 .input-button-wrapper {
@@ -188,7 +182,9 @@
     inset -2px -2px 6px rgba(77, 77, 77, 0.651);
   border-radius: 10px;
   overflow: hidden;
-  padding: 0.2rem 0.4rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  padding-right: 0.4rem;
 }
 
 .input-button-wrapper input {
@@ -222,7 +218,7 @@
   background-color: #555;
 }
 
-.static-label {
+#static-label {
   font-size: 1.4rem;
   color: #ffffff;
 }
@@ -232,184 +228,67 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 2rem;
   margin-top: 2rem;
-}
-
-.form-row.split {
-  gap: 4rem;
 }
 
 .input-column {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   gap: 1.2rem;
   flex: 1 1 240px;
 }
-
-/* Side Label Fields */
-.form-group.side-label {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
+/* Common wrapper for inputs */
+.input-shadow-wrapper {
+  width: 100%;
+  position: relative;
+  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.8),
+    inset -2px -2px 6px rgba(77, 77, 77, 0.651);
+  border-radius: 8px;
+  background-color: #1b1b1b;
 }
 
 .form-group.side-label label {
-  width: 110px;
   font-size: 1.4rem;
-  color: #ffffff;
 }
-
-.input-icon-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.input-icon-wrapper .custom-input {
-  width: 120px;
-  padding: 1rem;
-  border-radius: 8px;
-  border: none;
-  font-size: 1.2rem;
-  background-color: #1b1b1b;
-  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.8),
-    inset -2px -2px 6px rgba(77, 77, 77, 0.651);
-  color: white;
-  outline: none;
-  padding-right: 2.5rem; /* Make room for the icon */
-}
-
-.icon-inside-input {
-  position: absolute;
-  right: 10px;
-  height: 16px;
-  width: 16px;
-  pointer-events: none;
-  opacity: 0.8;
-}
-.form-group.side-label input {
-  flex: 1;
-  width: 120px;
-  padding: 1rem;
-  border-radius: 8px;
-  border: none;
-  font-size: 1.2rem;
-  background-color: #1b1b1b;
-  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.8),
-    inset -2px -2px 6px rgba(77, 77, 77, 0.651);
-  color: rgb(255, 255, 255);
-  outline: none;
-}
-.time-picker-wrapper {
-  position: relative;
+/* All inputs & selects */
+.custom-shadow-input {
   width: 100%;
-  max-width: 160px;
+  padding: 1rem;
+  font-size: 1.2rem;
+  color: white;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  font-family: inherit;
+  appearance: none;
 }
 
-/* Adjust icon inside timepicker */
-.time-picker-wrapper .icon-inside-input {
+/* Dropdown options */
+.custom-select-time option {
+  background-color: white;
+  color: black;
+}
+
+/* Inset unit for pace field */
+.input-with-unit-wrapper {
+  position: relative;
+}
+
+.with-unit {
+  padding-right: 60px; /* leave space for unit */
+}
+
+.unit-label-inside {
   position: absolute;
   top: 50%;
-  right: 10px; /* move slightly left for balance */
+  right: 1rem;
   transform: translateY(-50%);
-  height: 14px; /* smaller size */
-  width: 14px;
+  font-size: 1.1rem;
+  color: #ccc;
   pointer-events: none;
-  opacity: 0.7;
-  z-index: 10;
-}
-
-/* Improve alignment and box design */
-.react-time-picker {
-  width: 100%;
-}
-
-.react-time-picker__wrapper {
-  background-color: #1b1b1b;
-  border: none;
-  border-radius: 8px;
-  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.8),
-    inset -2px -2px 6px rgba(77, 77, 77, 0.651);
-  padding: 0.6rem 2.2rem 0.6rem 0.6rem;
-  display: flex;
-  align-items: center;
-}
-
-/* Input style inside TimePicker */
-.react-time-picker__inputGroup {
-  display: flex;
-  gap: 0.4rem;
-  color: white;
-  margin-right: 6px;
-}
-
-.react-time-picker__inputGroup__input {
-  background: transparent;
-  color: white;
-  border: none;
-  font-size: 1.2rem;
-  width: 36px;
-  text-align: center;
-  outline: none;
-}
-
-.react-time-picker__inputGroup__divider {
-  color: #aaa;
-  align-self: center;
-}
-/* Position your custom icon */
-.input-icon-wrapper .icon-inside-input {
-  position: absolute;
-  right: 10px;
-  height: 16px;
-  width: 16px;
-  pointer-events: none;
-  opacity: 0.8;
-}
-
-/* Input with unit suffix (like km/hr) */
-.input-with-unit {
-  display: flex;
-  border-radius: 50px;
-  overflow: hidden;
-  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.8),
-    inset -2px -2px 6px rgba(77, 77, 77, 0.651);
-  background-color: #1b1b1b;
-}
-
-.input-with-unit input {
-  border: none;
-  padding: 1rem;
-  font-size: 1.2rem;
-  outline: none;
-  color: white;
-  background: transparent;
-  width: 80px;
-}
-
-.unit-label {
-  background-color: #555;
-  color: white;
-  padding: 1rem;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-}
-.custom-select {
-  padding: 1rem;
-  border-radius: 8px;
-  border: none;
-  font-size: 1.2rem;
-  background-color: #1b1b1b;
-  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.8),
-    inset -2px -2px 6px rgba(77, 77, 77, 0.651);
-  color: white;
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 120px;
 }
 
 /* Distance Box */
@@ -586,74 +465,4 @@
   font-weight: 500;
   margin-top: 1rem;
   text-align: center;
-}
-
-@media (max-width: 1024px) {
-  .create-session-main {
-    flex-direction: column;
-    gap: 2rem;
-  }
-  .create-session-form,
-  .create-session-map {
-    width: 100%;
-    padding: 1.5rem;
-  }
-  .form-card {
-    margin-bottom: 6rem; /* give space to modal if opened */
-  }
-
-  .form-row.split {
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .distance-box {
-    width: 100%;
-  }
-
-  .details {
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .details-img img {
-    height: 80px;
-    width: 80px;
-  }
-}
-@media (max-width: 768px) {
-  .form-group.side-label {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .form-group.side-label label {
-    width: auto;
-    margin-bottom: 0.4rem;
-  }
-  .run-session-button,
-  .shared-create-button {
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-  }
-  .details-box p {
-    font-size: 1.4rem;
-  }
-}
-@media (max-width: 480px) {
-  .run-session-button,
-  .shared-create-button {
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-  }
-  .form-card-btm {
-    padding: 1rem;
-  }
-  .details-img img {
-    height: 80px;
-    width: 80px;
-  }
-  .details-box p {
-    font-size: 1.2rem;
-  }
 }
