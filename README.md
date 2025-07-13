@@ -57,17 +57,19 @@ The application embraces consistency, clarity, and accessibility:
   Get your OpenCage key from OpenCage Geocoder.
 
 📸 UI Screenshots
+    <img width="1910" height="937" alt="Screenshot 2025-07-13 185132" src="https://github.com/user-attachments/assets/7e4f7afe-8aef-4be6-ac5c-904927392012" />
+    <img width="1919" height="935" alt="Screenshot 2025-07-13 185154" src="https://github.com/user-attachments/assets/aae37431-6e54-40de-8cfb-ea031d244442" />
+    <img width="1919" height="936" alt="Screenshot 2025-07-13 185936" src="https://github.com/user-attachments/assets/644c81ae-af02-47b0-a132-4e4804073569" />
+    <img width="1912" height="930" alt="Screenshot 2025-07-13 190020" src="https://github.com/user-attachments/assets/a359647f-ca23-4542-be19-7e9cb98fbf75" />
     <img width="1919" height="929" alt="Screenshot 2025-07-13 190513" src="https://github.com/user-attachments/assets/31097aef-3eee-4455-a0ae-e4fe2c70a028" />
+    <img width="1898" height="852" alt="Screenshot 2025-07-13 190138" src="https://github.com/user-attachments/assets/5057ba37-d024-4f86-9438-93e29f6560da" />
+    <img width="1912" height="944" alt="Screenshot 2025-07-13 190201" src="https://github.com/user-attachments/assets/b4b70e55-3fd4-4dd4-9585-1dfa18d4319e" />
+    <img width="1919" height="937" alt="Screenshot 2025-07-13 190249" src="https://github.com/user-attachments/assets/eb646ec1-cc32-47e0-80b3-be4a5e4898ba" />
     <img width="1909" height="938" alt="Screenshot 2025-07-13 190447" src="https://github.com/user-attachments/assets/46cdc823-4089-4131-a945-b5a6d8b24b62" />
     <img width="1913" height="942" alt="Screenshot 2025-07-13 190329" src="https://github.com/user-attachments/assets/43c8973f-d061-4807-8d1e-2e4189dbfabc" />
     <img width="1914" height="935" alt="Screenshot 2025-07-13 190311" src="https://github.com/user-attachments/assets/d8095e52-ff45-4948-ac19-9bfa6929d9b1" />
-    <img width="1919" height="937" alt="Screenshot 2025-07-13 190249" src="https://github.com/user-attachments/assets/eb646ec1-cc32-47e0-80b3-be4a5e4898ba" />
-    <img width="1912" height="944" alt="Screenshot 2025-07-13 190201" src="https://github.com/user-attachments/assets/b4b70e55-3fd4-4dd4-9585-1dfa18d4319e" />
-    <img width="1898" height="852" alt="Screenshot 2025-07-13 190138" src="https://github.com/user-attachments/assets/5057ba37-d024-4f86-9438-93e29f6560da" />
-    <img width="1912" height="930" alt="Screenshot 2025-07-13 190020" src="https://github.com/user-attachments/assets/a359647f-ca23-4542-be19-7e9cb98fbf75" />
-    <img width="1919" height="936" alt="Screenshot 2025-07-13 185936" src="https://github.com/user-attachments/assets/644c81ae-af02-47b0-a132-4e4804073569" />
-    <img width="1919" height="935" alt="Screenshot 2025-07-13 185154" src="https://github.com/user-attachments/assets/aae37431-6e54-40de-8cfb-ea031d244442" />
-    <img width="1910" height="937" alt="Screenshot 2025-07-13 185132" src="https://github.com/user-attachments/assets/7e4f7afe-8aef-4be6-ac5c-904927392012" />
+
+    
 
 🚫 Limitations
 ❌ No Admin Panel yet (Admin dashboard may be added in a future update)
