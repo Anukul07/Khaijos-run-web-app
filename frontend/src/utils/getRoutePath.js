@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const ORS_API_KEY = "5b3ce3597851110001cf6248b4b7c208a7a446bd9136b758726772f7";
+const ORS_API_KEY = "#";
 
 export const getRoutePath = async (startCoords, endCoords) => {
   const body = {
