@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   FaCopyright,
@@ -44,11 +44,20 @@ const slides = [
   },
 ];
 export default function Landing() {
-  const [index, setIndex] = useState(0);
   const navigate = useNavigate();
+  const [index, setIndex] = useState(0);
   const total = slides.length;
   const next1 = (index + 1) % total;
   const next2 = (index + 2) % total;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % total);
+    }, 4000); // 4 seconds
+
+    return () => clearInterval(interval); // cleanup on unmount
+  }, [total]);
+
   return (
     <div className="page">
       <header>
@@ -92,7 +101,6 @@ export default function Landing() {
                 <div
                   key={i}
                   className={`preview ${idx === 1 ? "half-cut" : ""}`}
-                  onClick={() => setIndex(i)}
                 >
                   <img src={slides[i].img} alt={slides[i].h1} />
                 </div>
@@ -105,7 +113,6 @@ export default function Landing() {
                 <button
                   key={i}
                   className={`dot ${i === index ? "active" : ""}`}
-                  onClick={() => setIndex(i)}
                   aria-label={`Go to slide ${i + 1}`}
                 />
               ))}
